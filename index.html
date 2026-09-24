@@ -171,34 +171,47 @@
     <h2>Are You a Contractor?</h2>
     <p class="section-sub">Join our network and get matched with homeowners in South Jersey looking for licensed, reliable pros.</p>
 
-    <div class="contractor-form-card">
-      <form id="contractor-form" novalidate>
-        <div class="form-grid">
-          <label>Business Name
-            <input type="text" name="businessName" required>
-          </label>
-          <label>Contact Name
-            <input type="text" name="contactName" required>
-          </label>
-          <label>Phone
-            <input type="tel" name="phone" required>
-          </label>
-          <label>Email
-            <input type="email" name="email" required>
-          </label>
-          <label>Primary Trade / Specialty
-            <input type="text" name="trade" placeholder="e.g. Roofing, HVAC, Plumbing" required>
-          </label>
-          <label>License Number
-            <input type="text" name="license" required>
-          </label>
-          <label>Years in Business
-            <input type="text" name="yearsInBusiness">
-          </label>
-          <label>Towns / Service Area
-            <input type="text" name="serviceArea" placeholder="e.g. Camden, Gloucester, Burlington counties">
-          </label>
-        </div>
+   <div class="form-grid">
+  <label>Business Name
+    <input type="text" name="businessName" required>
+  </label>
+  <label>Contact Name
+    <input type="text" name="contactName" required>
+  </label>
+  <label>Phone
+    <input type="tel" name="phone" required>
+  </label>
+  <label>Email
+    <input type="email" name="email" required>
+  </label>
+  <label>Primary Trade / Specialty
+    <select name="trade" required>
+      <option value="" disabled selected>Select a trade</option>
+      <option>Roofing</option>
+      <option>HVAC</option>
+      <option>Plumbing</option>
+      <option>Fencing</option>
+      <option>Electrical</option>
+      <option>Restoration</option>
+      <option>Masonry</option>
+      <option>Lawncare</option>
+      <option>Tree Removal</option>
+      <option>Gutters</option>
+      <option>Siding</option>
+      <option>Painting</option>
+      <option>Cleaning Services</option>
+      <option>Solar</option>
+      <option>Basement Waterproofing</option>
+      <option>Foundation Issues</option>
+      <option>Mold</option>
+      <option>Windows / Doors</option>
+      <option>Other</option>
+    </select>
+  </label>
+  <label>Towns / Service Area
+    <input type="text" name="serviceArea" placeholder="e.g. Camden, Gloucester, Burlington counties">
+  </label>
+</div>
         <button type="submit" class="submit-btn">Submit Application</button>
         <p class="form-error" id="contractor-form-error" hidden></p>
         <p class="form-success" id="contractor-form-success" hidden>Thanks! We'll be in touch after reviewing your application.</p>
