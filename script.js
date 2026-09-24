@@ -78,3 +78,51 @@ form.addEventListener('submit', async (e) => {
     submitBtn.textContent = 'Get Connected Today';
   }
 });
+
+// Contractor application form
+const contractorForm = document.getElementById('contractor-form');
+if (contractorForm) {
+  const contractorError = document.getElementById('contractor-form-error');
+  const contractorSuccess = document.getElementById('contractor-form-success');
+
+  contractorForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    contractorError.hidden = true;
+    contractorSuccess.hidden = true;
+
+    const formData = new FormData(contractorForm);
+    const payload = {
+      businessName: formData.get('businessName'),
+      contactName: formData.get('contactName'),
+      phone: formData.get('phone'),
+      email: formData.get('email'),
+      trade: formData.get('trade'),
+      license: formData.get('license'),
+      yearsInBusiness: formData.get('yearsInBusiness'),
+      serviceArea: formData.get('serviceArea'),
+    };
+
+    const submitBtn = contractorForm.querySelector('.submit-btn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    try {
+      const res = await fetch('/.netlify/functions/submit-contractor', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error('Submission failed');
+
+      contractorForm.reset();
+      contractorSuccess.hidden = false;
+    } catch (err) {
+      contractorError.textContent = 'Something went wrong submitting your application. Please call us at (609) 605-8851.';
+      contractorError.hidden = false;
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Application';
+    }
+  });
+}
