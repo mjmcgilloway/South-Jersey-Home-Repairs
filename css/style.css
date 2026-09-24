@@ -87,3 +87,12 @@ a { color: var(--orange); text-decoration: none; }
   .two-col, .card-grid { grid-template-columns: 1fr; }
   .hero-copy h1 { font-size: 2rem; }
 }
+
+.section-sub { text-align: center; color: var(--muted); max-width: 560px; margin: 0 auto 32px; }
+.contractor-form-card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); padding: 32px; max-width: 720px; margin: 0 auto; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; margin-bottom: 20px; }
+.form-grid label { font-weight: 600; font-size: 0.9rem; }
+.form-grid input { width: 100%; margin-top: 6px; padding: 12px; border-radius: 8px; border: 2px solid #e3e7ee; font-size: 1rem; font-family: inherit; }
+.form-grid input:focus { outline: none; border-color: var(--orange); }
+.form-success { color: #1a7f37; font-size: 0.9rem; margin-top: 10px; }
+@media (max-width: 860px) { .form-grid { grid-template-columns: 1fr; } }
