@@ -92,15 +92,13 @@ if (contractorForm) {
 
     const formData = new FormData(contractorForm);
     const payload = {
-      businessName: formData.get('businessName'),
-      contactName: formData.get('contactName'),
-      phone: formData.get('phone'),
-      email: formData.get('email'),
-      trade: formData.get('trade'),
-      license: formData.get('license'),
-      yearsInBusiness: formData.get('yearsInBusiness'),
-      serviceArea: formData.get('serviceArea'),
-    };
+  businessName: formData.get('businessName'),
+  contactName: formData.get('contactName'),
+  phone: formData.get('phone'),
+  email: formData.get('email'),
+  trade: formData.get('trade'),
+  serviceArea: formData.get('serviceArea'),
+};
 
     const submitBtn = contractorForm.querySelector('.submit-btn');
     submitBtn.disabled = true;
