@@ -20,11 +20,9 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: 'Invalid JSON' };
   }
 
-  const { businessName, contactName, phone, email, trade, license, yearsInBusiness, serviceArea } = data;
+  const { businessName, contactName, phone, email, trade, serviceArea } = data;
 
-  if (!businessName || !contactName || !phone || !email || !trade || !license) {
-    return { statusCode: 400, body: 'Missing required fields' };
-  }
+if (!businessName || !contactName || !phone || !email || !trade) {
 
   const { AIRTABLE_API_KEY, AIRTABLE_BASE_ID, AIRTABLE_CONTRACTORS_TABLE_NAME } = process.env;
 
@@ -38,18 +36,17 @@ exports.handler = async (event) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+       
         fields: {
-          'Business Name': businessName,
-          'Contact Name': contactName,
-          'Phone': phone,
-          'Email': email,
-          'Trade': trade,
-          'License Number': license,
-          'Years in Business': yearsInBusiness || '',
-          'Service Area': serviceArea || '',
-          'Submitted At': new Date().toISOString(),
-          'Status': 'New',
-        },
+  'Business Name': businessName,
+  'Contact Name': contactName,
+  'Phone': phone,
+  'Email': email,
+  'Trade': trade,
+  'Service Area': serviceArea || '',
+  'Submitted At': new Date().toISOString(),
+  'Status': 'New',
+},
       }),
     });
 
