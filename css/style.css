@@ -160,8 +160,12 @@ a { color: var(--green); text-decoration: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
   margin-bottom: 14px;
+}
+.icon-badge svg {
+  width: 24px;
+  height: 24px;
+  color: #fff;
 }
 
 .rooted-item {
