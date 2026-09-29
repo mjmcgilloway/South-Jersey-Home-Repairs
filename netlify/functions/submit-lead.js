@@ -2,7 +2,6 @@
 //
 // Receives the lead form JSON from the browser and writes a new record
 // directly into Airtable using the Airtable REST API.
-// This replaces the "Zapier: catch webhook -> create Airtable record" step.
 //
 // Required environment variables (set these in Netlify, not in this file):
 //   AIRTABLE_API_KEY   - a personal access token from airtable.com/create/tokens
@@ -40,13 +39,14 @@ exports.handler = async (event) => {
       },
       body: JSON.stringify({
         fields: {
-          'Service': service,
-          'Budget': budget,
-          'Urgency': urgency,
           'Name': name,
           'Phone': phone,
           'Email': email,
-          'Location': location || '',
+          'Zip': location || '',
+          'Service Type': service,
+          'Budget': budget,
+          'Urgency': urgency,
+          'Status': 'New',
           'Submitted At': new Date().toISOString(),
           'Source': 'Website Form',
         },
