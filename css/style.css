@@ -150,3 +150,42 @@ a { color: var(--green); text-decoration: none; }
   .hero-copy h1 { font-size: 2rem; }
   .logo-icon { height: 32px; }
 }
+
+/* Rooted / Matchmaker / Repairs refresh */
+.icon-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin-bottom: 14px;
+}
+
+.rooted-item {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.matchmaker .card, .repairs .card {
+  border-top: 4px solid var(--green);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.matchmaker .card:hover, .repairs .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(15, 37, 64, 0.2);
+}
+
+.rooted h2::after, .matchmaker h2::after, .repairs h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--green);
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
