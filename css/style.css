@@ -21,9 +21,10 @@ p { color: var(--muted); margin: 0 0 12px; }
 a { color: var(--green); text-decoration: none; }
 
 /* Header */
-.site-header { background: var(--navy); padding: 12px 0; }
+.site-header { background: var(--navy); padding: 16px 0; }
 .header-inner { display: flex; justify-content: space-between; align-items: center; }
-.logo-img { height: 56px; width: auto; display: block; }
+.logo { color: #fff; font-weight: 800; font-size: 1.6rem; }
+.logo span { color: var(--green); }
 .header-phone { color: #fff; font-weight: 600; }
 
 /* Hero */
@@ -36,29 +37,66 @@ a { color: var(--green); text-decoration: none; }
 .hero-stats strong { color: var(--green); font-size: 1.3rem; }
 .hero-stats span { color: #b9c3d2; font-size: 0.85rem; }
 
+.hero-logo {
+  background: #fff;
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  margin-top: 28px;
+}
+.hero-logo img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
 .hero-form-card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px; }
 .form-step { display: none; }
 .form-step.active { display: block; animation: fadeIn 0.25s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
 
 .option-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .option-btn {
-  padding: 12px 14px; border: 2px solid #e3e7ee; background: #fff; border-radius: 10px;
-  font-weight: 600; font-size: 0.92rem; cursor: pointer; transition: all 0.15s ease; text-align: left;
+  padding: 12px 14px;
+  border: 2px solid #e3e7ee;
+  background: #fff;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
 }
 .option-btn:hover { border-color: var(--green); }
 .option-btn.selected { border-color: var(--green); background: #f0f3e9; color: var(--green-dark); }
 
 .hero-form-card label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 14px; }
 .hero-form-card input {
-  width: 100%; margin-top: 6px; padding: 12px; border-radius: 8px; border: 2px solid #e3e7ee;
-  font-size: 1rem; font-family: inherit;
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #e3e7ee;
+  font-size: 1rem;
+  font-family: inherit;
 }
 .hero-form-card input:focus { outline: none; border-color: var(--green); }
 
 .submit-btn, .nav-btn {
-  width: 100%; padding: 14px; margin-top: 8px; border: none; border-radius: 10px;
-  background: var(--green); color: #fff; font-weight: 700; font-size: 1rem; cursor: pointer;
+  width: 100%;
+  padding: 14px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 10px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
   transition: background 0.15s ease;
 }
 .submit-btn:hover, .nav-btn:hover { background: var(--green-dark); }
@@ -85,18 +123,25 @@ a { color: var(--green); text-decoration: none; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; margin-bottom: 20px; }
 .form-grid label { font-weight: 600; font-size: 0.9rem; }
 .form-grid input, .form-grid select {
-  width: 100%; margin-top: 6px; padding: 12px; border-radius: 8px; border: 2px solid #e3e7ee;
-  font-size: 1rem; font-family: inherit; background: #fff; color: var(--text);
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #e3e7ee;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+  color: var(--text);
 }
 .form-grid input:focus, .form-grid select:focus { outline: none; border-color: var(--green); }
 .form-success { color: #1a7f37; font-size: 0.9rem; margin-top: 10px; }
 
-/* Testimonials */
+/* Testimonials (ready for future use) */
 .testimonial-card { background: var(--card-bg); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
 .testimonial-stars { color: var(--green); font-size: 1.1rem; margin-bottom: 10px; }
 .testimonial-name { font-weight: 700; margin-top: 12px; font-size: 0.9rem; }
 
-/* Service area */
+/* Service area list (ready for future use) */
 .service-area-list { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 700px; margin: 0 auto; }
 .service-area-list span { background: #fff; border: 2px solid #e3e7ee; border-radius: 20px; padding: 6px 16px; font-size: 0.88rem; font-weight: 600; }
 
@@ -114,26 +159,5 @@ a { color: var(--green); text-decoration: none; }
   .hero-inner { grid-template-columns: 1fr; }
   .two-col, .card-grid, .form-grid { grid-template-columns: 1fr; }
   .hero-copy h1 { font-size: 2rem; }
-  .logo-img { height: 44px; }
-}
-
-.logo { color: #fff; font-weight: 800; font-size: 1.6rem; }
-.logo span { color: var(--green); }
-
-.hero-logo {
-  background: #fff;
-  display: inline-block;
-  padding: 8px 12px;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-  margin-top: 28px;
-}
-.hero-logo img {
-  height: 36px;
-  width: auto;
-  display: block;
-}
-
-@media (max-width: 860px) {
   .hero-logo img { height: 30px; }
 }
