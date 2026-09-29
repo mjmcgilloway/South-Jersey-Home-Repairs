@@ -23,8 +23,10 @@ a { color: var(--green); text-decoration: none; }
 /* Header */
 .site-header { background: var(--navy); padding: 16px 0; }
 .header-inner { display: flex; justify-content: space-between; align-items: center; }
-.logo { color: #fff; font-weight: 800; font-size: 1.6rem; }
-.logo span { color: var(--green); }
+.logo-link { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-icon { height: 40px; width: auto; display: block; }
+.logo { color: #fff; font-weight: 800; font-size: 1.4rem; }
+.logo-accent { color: var(--green); }
 .header-phone { color: #fff; font-weight: 600; }
 
 /* Hero */
@@ -36,20 +38,6 @@ a { color: var(--green); text-decoration: none; }
 .hero-stats li { color: #fff; display: flex; flex-direction: column; }
 .hero-stats strong { color: var(--green); font-size: 1.3rem; }
 .hero-stats span { color: #b9c3d2; font-size: 0.85rem; }
-
-.hero-logo {
-  background: #fff;
-  display: inline-block;
-  padding: 8px 12px;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-  margin-top: 28px;
-}
-.hero-logo img {
-  height: 36px;
-  width: auto;
-  display: block;
-}
 
 .hero-form-card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px; }
 .form-step { display: none; }
@@ -136,15 +124,6 @@ a { color: var(--green); text-decoration: none; }
 .form-grid input:focus, .form-grid select:focus { outline: none; border-color: var(--green); }
 .form-success { color: #1a7f37; font-size: 0.9rem; margin-top: 10px; }
 
-/* Testimonials (ready for future use) */
-.testimonial-card { background: var(--card-bg); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
-.testimonial-stars { color: var(--green); font-size: 1.1rem; margin-bottom: 10px; }
-.testimonial-name { font-weight: 700; margin-top: 12px; font-size: 0.9rem; }
-
-/* Service area list (ready for future use) */
-.service-area-list { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 700px; margin: 0 auto; }
-.service-area-list span { background: #fff; border: 2px solid #e3e7ee; border-radius: 20px; padding: 6px 16px; font-size: 0.88rem; font-weight: 600; }
-
 .faq { background: #fff; }
 .accordion { max-width: 760px; margin: 0 auto; }
 .accordion details { border-bottom: 1px solid #e3e7ee; padding: 16px 0; }
@@ -159,5 +138,5 @@ a { color: var(--green); text-decoration: none; }
   .hero-inner { grid-template-columns: 1fr; }
   .two-col, .card-grid, .form-grid { grid-template-columns: 1fr; }
   .hero-copy h1 { font-size: 2rem; }
-  .hero-logo img { height: 30px; }
+  .logo-icon { height: 32px; }
 }
