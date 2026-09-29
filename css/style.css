@@ -116,3 +116,24 @@ a { color: var(--green); text-decoration: none; }
   .hero-copy h1 { font-size: 2rem; }
   .logo-img { height: 44px; }
 }
+
+.logo { color: #fff; font-weight: 800; font-size: 1.6rem; }
+.logo span { color: var(--green); }
+
+.hero-logo {
+  background: #fff;
+  display: inline-block;
+  padding: 16px 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+.hero-logo img {
+  height: 90px;
+  width: auto;
+  display: block;
+}
+
+@media (max-width: 860px) {
+  .hero-logo img { height: 64px; }
+}
