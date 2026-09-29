@@ -123,17 +123,17 @@ a { color: var(--green); text-decoration: none; }
 .hero-logo {
   background: #fff;
   display: inline-block;
-  padding: 16px 24px;
-  border-radius: var(--radius);
+  padding: 8px 12px;
+  border-radius: 10px;
   box-shadow: var(--shadow);
-  margin-bottom: 24px;
+  margin-top: 28px;
 }
 .hero-logo img {
-  height: 90px;
+  height: 36px;
   width: auto;
   display: block;
 }
 
 @media (max-width: 860px) {
-  .hero-logo img { height: 64px; }
+  .hero-logo img { height: 30px; }
 }
