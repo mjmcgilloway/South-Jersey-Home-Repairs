@@ -4,7 +4,7 @@ const form = document.getElementById('lead-form');
 const steps = Array.from(form.querySelectorAll('.form-step'));
 const errorEl = document.getElementById('form-error');
 
-const answers = { service: '', budget: '', urgency: '' };
+const answers = { service: '' };
 let currentStepIndex = 0;
 
 function showStep(index) {
@@ -39,18 +39,15 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
   errorEl.hidden = true;
 
-  const formData = new FormData(form);
   const payload = {
     service: answers.service,
-    budget: answers.budget,
-    urgency: answers.urgency,
     name: formData.get('name'),
     phone: formData.get('phone'),
     email: formData.get('email'),
     location: formData.get('location'),
   };
 
-  if (!payload.service || !payload.budget || !payload.urgency) {
+  if (!payload.service) {
     errorEl.textContent = 'Please complete every step before submitting.';
     errorEl.hidden = false;
     goToStepByName('1');
