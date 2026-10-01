@@ -20,7 +20,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: 'Invalid JSON' };
   }
 
-  const { businessName, contactName, phone, email, trade, serviceArea } = data;
+const { businessName, contactName, phone, email, trade, zip } = data;
 
 if (!businessName || !contactName || !phone || !email || !trade) {
 
