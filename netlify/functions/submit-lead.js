@@ -20,9 +20,9 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: 'Invalid JSON' };
   }
 
-  const { service, budget, urgency, name, phone, email, location } = data;
+  const { service, name, phone, email, location } = data;
 
-  if (!service || !budget || !urgency || !name || !phone || !email) {
+  if (!service || !name || !phone || !email) {
     return { statusCode: 400, body: 'Missing required fields' };
   }
 
