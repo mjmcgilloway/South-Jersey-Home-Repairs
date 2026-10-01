@@ -232,3 +232,16 @@ a { color: var(--green); text-decoration: none; }
   .section { padding-top: 48px; padding-bottom: 48px; }
   .section h2 { font-size: 1.6rem; }
 }
+
+/* Mobile header: "South Jersey" on top, "Home Repairs" underneath */
+@media (max-width: 700px) {
+  .site-header .logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+  .site-header .logo-accent {
+    display: block;
+  }
+}
