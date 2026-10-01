@@ -39,6 +39,7 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
   errorEl.hidden = true;
 
+  const formData = new FormData(form);
   const payload = {
     service: answers.service,
     name: formData.get('name'),
