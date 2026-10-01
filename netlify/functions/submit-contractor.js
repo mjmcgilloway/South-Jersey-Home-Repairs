@@ -1,12 +1,12 @@
 // netlify/functions/submit-contractor.js
 //
 // Receives contractor application form JSON and writes a new record
-// into a separate Airtable table for contractor applications.
+// into the Contractors table in Airtable.
 //
 // Required environment variables:
-//   AIRTABLE_API_KEY                - same token used for the lead form
-//   AIRTABLE_BASE_ID                - same base ID used for the lead form
-//   AIRTABLE_CONTRACTORS_TABLE_NAME - exact name of the contractors table, e.g. "Contractors"
+//   AIRTABLE_API_KEY                - personal access token
+//   AIRTABLE_BASE_ID                - the base ID
+//   AIRTABLE_CONTRACTORS_TABLE_NAME - the Contractors table name or ID
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -20,9 +20,11 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: 'Invalid JSON' };
   }
 
-const { businessName, contactName, phone, email, trade, zip } = data;
+  const { businessName, contactName, phone, email, trade, zip } = data;
 
-if (!businessName || !contactName || !phone || !email || !trade) {
+  if (!businessName || !contactName || !phone || !email || !trade) {
+    return { statusCode: 400, body: 'Missing required fields' };
+  }
 
   const { AIRTABLE_API_KEY, AIRTABLE_BASE_ID, AIRTABLE_CONTRACTORS_TABLE_NAME } = process.env;
 
@@ -36,15 +38,14 @@ if (!businessName || !contactName || !phone || !email || !trade) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-       
         fields: {
-  'Company Name': businessName,
-  'Contact Name': contactName,
-  'Phone': phone,
-  'Email': email,
-  'Service': trade,
-  'Zip': zip || '',
-},
+          'Company Name': businessName,
+          'Contact Name': contactName,
+          'Phone': phone,
+          'Email': email,
+          'Service': trade,
+          'Zip': zip || '',
+        },
       }),
     });
 
