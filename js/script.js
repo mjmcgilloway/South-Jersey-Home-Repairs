@@ -95,7 +95,7 @@ if (contractorForm) {
   phone: formData.get('phone'),
   email: formData.get('email'),
   trade: formData.get('trade'),
-  serviceArea: formData.get('serviceArea'),
+  zip: formData.get('zip'),
 };
 
     const submitBtn = contractorForm.querySelector('.submit-btn');
