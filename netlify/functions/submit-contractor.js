@@ -38,14 +38,12 @@ if (!businessName || !contactName || !phone || !email || !trade) {
       body: JSON.stringify({
        
         fields: {
-  'Business Name': businessName,
+  'Company Name': businessName,
   'Contact Name': contactName,
   'Phone': phone,
   'Email': email,
-  'Trade': trade,
-  'Service Area': serviceArea || '',
-  'Submitted At': new Date().toISOString(),
-  'Status': 'New',
+  'Service': trade,
+  'Zip': zip || '',
 },
       }),
     });
