@@ -245,3 +245,25 @@ a { color: var(--green); text-decoration: none; }
     display: block;
   }
 }
+
+
+/* Hero tagline and contractor link */
+.hero-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8b9a5b;
+  margin: 0 0 12px;
+}
+.hero-contractor-link {
+  display: inline-block;
+  margin: 0 0 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #8b9a5b;
+  text-decoration: none;
+}
+.hero-contractor-link:hover {
+  text-decoration: underline;
+}
