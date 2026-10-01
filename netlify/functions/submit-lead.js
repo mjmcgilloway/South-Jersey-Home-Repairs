@@ -38,14 +38,12 @@ exports.handler = async (event) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        fields: {
+             fields: {
           'Name': name,
           'Phone': phone,
           'Email': email,
           'Zip': location || '',
           'Service Type': service,
-          'Budget': budget,
-          'Urgency': urgency,
           'Status': 'New',
           'Submitted At': new Date().toISOString(),
           'Source': 'Website Form',
