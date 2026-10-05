@@ -20,15 +20,35 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: 'Invalid JSON' };
   }
 
-  const { service, name, phone, email, location } = data;
+  const { service, name, phone, email, location, notes } = data;
 
   if (!service || !name || !phone || !email) {
     return { statusCode: 400, body: 'Missing required fields' };
   }
 
+  // Notes are optional. Trim them and cap the length so nobody can
+  // paste a novel into the form.
+  const cleanNotes = typeof notes === 'string' ? notes.trim().slice(0, 2000) : '';
+
   const { AIRTABLE_API_KEY, AIRTABLE_BASE_ID, AIRTABLE_TABLE_NAME } = process.env;
 
   const airtableUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE_NAME)}`;
+
+  const fields = {
+    'Name': name,
+    'Phone': phone,
+    'Email': email,
+    'Zip': location || '',
+    'Service Type': service,
+    'Status': 'New',
+    'Submitted At': new Date().toISOString(),
+    'Source': 'Website Form',
+  };
+
+  // Only send Notes when the homeowner actually typed something.
+  if (cleanNotes) {
+    fields['Notes'] = cleanNotes;
+  }
 
   try {
     const response = await fetch(airtableUrl, {
@@ -37,18 +57,7 @@ exports.handler = async (event) => {
         Authorization: `Bearer ${AIRTABLE_API_KEY}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-             fields: {
-          'Name': name,
-          'Phone': phone,
-          'Email': email,
-          'Zip': location || '',
-          'Service Type': service,
-          'Status': 'New',
-          'Submitted At': new Date().toISOString(),
-          'Source': 'Website Form',
-        },
-      }),
+      body: JSON.stringify({ fields }),
     });
 
     if (!response.ok) {
