@@ -34,6 +34,13 @@ form.querySelectorAll('.option-grid').forEach(grid => {
   });
 });
 
+// Continue buttons (steps that don't auto-advance, like the notes step)
+form.querySelectorAll('.next-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    showStep(currentStepIndex + 1);
+  });
+});
+
 // Final submit
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -42,6 +49,7 @@ form.addEventListener('submit', async (e) => {
   const formData = new FormData(form);
   const payload = {
     service: answers.service,
+    notes: (formData.get('notes') || '').trim(),
     name: formData.get('name'),
     phone: formData.get('phone'),
     email: formData.get('email'),
@@ -55,7 +63,9 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
-  const submitBtn = form.querySelector('.submit-btn');
+  // Target the real submit button specifically. The Continue button on the
+  // notes step also uses the .submit-btn class for styling.
+  const submitBtn = form.querySelector('button[type="submit"]');
   submitBtn.disabled = true;
   submitBtn.textContent = 'Submitting...';
 
