@@ -79,6 +79,25 @@ a { color: var(--green); text-decoration: none; }
 }
 .hero-form-card input:focus { outline: none; border-color: var(--green); }
 
+/* Lead form step 2: "Tell us a little bit more" box */
+.hero-form-card .notes-input {
+  display: block;
+  width: 100%;
+  min-height: 110px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #e3e7ee;
+  font-size: 1rem;
+  font-family: inherit;
+  line-height: 1.5;
+  color: var(--text);
+  background: #fff;
+  resize: vertical;
+}
+.hero-form-card .notes-input:focus { outline: none; border-color: var(--green); }
+.hero-form-card .notes-input::placeholder { color: #9aa3af; }
+.hero-form-card .step-hint { color: var(--muted); font-size: 0.85rem; margin: 8px 0 6px; }
+
 .submit-btn, .nav-btn {
   width: 100%;
   padding: 14px;
