@@ -69,6 +69,7 @@ function header(active = "") {
           ${items}
           </ul>
         </li>
+        <li><a href="/service-areas"${cur("service-areas")}>Service areas</a></li>
         <li><a class="sjn-cta" href="/contractors"${cur("contractors")}>Contractors</a></li>
       </ul>
     </nav>
@@ -85,6 +86,7 @@ function footer() {
     <nav class="sjn-footer-links" aria-label="Services">
       ${links}
     </nav>
+    <p><a href="/service-areas">Service areas: Camden &amp; Gloucester counties</a></p>
     <p>© <span id="year"></span> South Jersey Home Repairs, LLC. All rights reserved. LLC #0451530369</p>
     <p>Phone: <a href="tel:${TEL}">${PHONE.replace(/[()]/g, "").replace(" ", "-")}</a></p>
   </div>
@@ -215,6 +217,7 @@ ${cards}
         <p>Describe it in the form above. Chances are we know someone.</p>
       </div>
     </div>
+    <p style="margin-top:1.5rem">We match homeowners with ${esc(t.name.toLowerCase())} pros throughout Camden and Gloucester counties. <a href="/service-areas">See all the towns we serve</a>.</p>
   </div>
 </section>
 
@@ -304,43 +307,137 @@ function aboutPage() {
 }
 
 function contractorsPage() {
+  const low = ["Handyman / General Repair", "Painting", "Landscaping / Lawn Care", "Cleaning Services", "Pest Control", "Gutter Services", "Fencing", "Flooring"];
+  const high = ["Plumbing", "Electrical", "HVAC", "Roofing", "Solar", "Windows & Doors", "Siding", "Concrete / Masonry", "Kitchen & Bath Remodeling", "Water Damage / Restoration", "Foundation Repair", "Tree Removal"];
+  const li = (arr) => arr.map((x) => `<li>${esc(x)}</li>`).join("");
   return head({
     title: "For Contractors | South Jersey Home Repairs",
-    description: "Get matched with South Jersey homeowners looking for licensed, reliable pros in your trade. Pay for qualified leads.",
+    description: "Exclusive, personally vetted homeowner leads for South Jersey contractors. No membership, no shared leads, no paying for leads that never respond.",
     canonical: "/contractors"
   }) + header("contractors") + `
+<style>
+  .sjc-lead { max-width: 760px; }
+  .sjc-table-wrap { overflow-x: auto; margin: 1rem 0; }
+  .sjc-table { width: 100%; border-collapse: collapse; background: #fff; font-size: .95rem; }
+  .sjc-table th, .sjc-table td { padding: .75rem .9rem; border: 1px solid #dde3e8; text-align: left; vertical-align: top; }
+  .sjc-table thead th { background: #1e2f4d; color: #fff; }
+  .sjc-table tbody tr:nth-child(even) { background: #f6f8f9; }
+  .sjc-table .us { font-weight: 600; }
+  .sjc-yes { color: #3b6b2a; font-weight: 700; }
+  .sjc-no { color: #a3342b; font-weight: 700; }
+  .sjc-fees { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .sjc-fees ul { margin: .5rem 0 0; padding-left: 1.2rem; columns: 2; column-gap: 1.25rem; }
+  .sjc-fees li { margin-bottom: .3rem; break-inside: avoid; }
+  .sjc-example { background: #f3f6ef; border-left: 4px solid #6b8e3a; padding: .9rem 1rem; border-radius: 4px; max-width: 760px; }
+  .sjc-note { font-size: .85rem; color: #5b6670; max-width: 900px; }
+  .sjc-checks { margin: .5rem 0 0; padding-left: 1.2rem; }
+  .sjc-checks li { margin-bottom: .35rem; }
+  .sjc-contact { margin-top: 1rem; }
+  @media (max-width: 760px) { .sjc-fees { grid-template-columns: 1fr; } .sjc-fees ul { columns: 1; } }
+</style>
+
 <section class="hero sjn-page-hero">
   <div class="container">
     <div class="hero-copy">
-      <h1>Get matched with homeowners who need your trade</h1>
-      <p class="hero-sub">South Jersey homeowners come to us when something needs fixing. We send each request to a licensed contractor in our network who does that kind of work in that area.</p>
+      <h1>Exclusive, pre-vetted leads for South Jersey contractors</h1>
+      <p class="hero-sub">No membership. No shared leads. No paying for homeowners who never respond. Every lead is personally verified by a real person before it ever reaches you.</p>
       <a href="#apply" class="hero-contractor-link">Apply to join our network →</a>
-    </div>
-  </div>
-</section>
-
-<section class="section matchmaker">
-  <div class="container">
-    <h2>How it works</h2>
-    <div class="card-grid sjn-steps">
-      <div class="card"><h3>1. Apply</h3><p>Tell us your company, your trade, and where you're based.</p></div>
-      <div class="card"><h3>2. We review and connect</h3><p>We'll reach out to talk through the jobs you want and the areas you cover.</p></div>
-      <div class="card"><h3>3. Get matched</h3><p>When a homeowner needs your trade in your area, we send you their info and job details.</p></div>
-      <div class="card"><h3>4. Win the job</h3><p>You contact the homeowner, quote the work, and do it as your own customer.</p></div>
-      <div class="card"><h3>5. Pay for qualified leads</h3><p>We invoice you, and you can pay by card or bank transfer.</p></div>
     </div>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <h2>Pricing</h2>
+    <h2>Built for quality, not quantity</h2>
+    <p class="sjc-lead">This isn't a high-volume model designed to flood your schedule and hope a few leads stick. That approach overwhelms contractors financially and leaves you paying for dead ends. Instead, it's a personal, lower-volume service. Every lead you receive has already been vetted by a real person, so you get fewer leads that are far more likely to turn into real, paying work.</p>
+  </div>
+</section>
+
+<section class="section matchmaker">
+  <div class="container">
+    <h2>How it works</h2>
     <div class="card-grid">
-      <div class="card"><h3 class="sjn-price">$50</h3><p>per qualified lead for lower-ticket trades</p></div>
-      <div class="card"><h3 class="sjn-price">$75</h3><p>per qualified lead for higher-ticket and technical trades</p></div>
-      <div class="card"><h3 class="sjn-price">5% to 1%</h3><p>of the job value when you close the job, tiered so bigger jobs pay a lower percentage</p></div>
+      <div class="card">
+        <h3>1. The lead comes in</h3>
+        <p>A homeowner fills out a request on our website or reaches out by phone or email. We capture the type of work, the property location, and the best way to reach them.</p>
+      </div>
+      <div class="card">
+        <h3>2. We vet every lead</h3>
+        <p>Before anything is sent to you, we personally:</p>
+        <ul class="sjc-checks">
+          <li>Confirm the homeowner's phone and email are real and reachable</li>
+          <li>Talk with the homeowner to understand the actual scope of the project</li>
+          <li>Confirm the property is in your service area and the job fits your trade and capacity</li>
+          <li>Filter out duplicates, spam, and unqualified inquiries</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>3. You follow up and win the job</h3>
+        <p>You get the lead directly, with enough context to call the homeowner prepared, not cold. The lead fee is charged at this point. If the job closes, the referral percentage applies with your lead fee credited toward it.</p>
+      </div>
+      <div class="card">
+        <h3>4. Billing is simple</h3>
+        <p>Invoices are sent electronically and can be paid by credit/debit card or bank transfer (ACH). No card processing fees or surcharges, ever. You'll always have a clear, itemized record of what was charged and why.</p>
+      </div>
     </div>
-    <p class="sjn-prose">The lead fee you already paid is credited against the closing percentage.</p>
+  </div>
+</section>
+
+<section class="section" id="pricing">
+  <div class="container">
+    <h2>Pricing</h2>
+    <h3>Qualified lead fee by trade</h3>
+    <p class="sjc-lead">A flat fee per qualified, verified lead delivered, whether or not the job closes.</p>
+    <div class="sjc-fees">
+      <div class="card">
+        <h3 class="sjn-price">$50</h3>
+        <p>per qualified lead</p>
+        <ul>${li(low)}</ul>
+      </div>
+      <div class="card">
+        <h3 class="sjn-price">$75</h3>
+        <p>per qualified lead</p>
+        <ul>${li(high)}</ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top:2.25rem">Referral percentage on closed jobs</h3>
+    <p class="sjc-lead">Applies to every trade once a referred job closes. The lead fee you already paid is credited against what's owed, so you never pay twice for the same job.</p>
+    <div class="sjc-table-wrap" style="max-width:520px">
+      <table class="sjc-table">
+        <thead><tr><th>Closed job value</th><th>Referral percentage</th></tr></thead>
+        <tbody>
+          <tr><td>$500 – $1,999</td><td>5%</td></tr>
+          <tr><td>$2,000 – $4,999</td><td>4%</td></tr>
+          <tr><td>$5,000 – $14,999</td><td>3%</td></tr>
+          <tr><td>$15,000 – $29,999</td><td>2%</td></tr>
+          <tr><td>$30,000+</td><td>1%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sjc-example"><strong>Example:</strong> A $6,000 job closes at the 3% tier, so $180 is owed. The $75 lead fee you already paid is credited, leaving a balance of $105.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>How we compare to national platforms</h2>
+    <p class="sjc-lead">It's not just the sticker price per lead. It's what you actually get for it.</p>
+    <div class="sjc-table-wrap">
+      <table class="sjc-table">
+        <thead><tr><th></th><th>South Jersey Home Repairs</th><th>Angi / HomeAdvisor</th><th>Thumbtack</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Membership fee</th><td class="us"><span class="sjc-yes">✓</span> $0, never a membership</td><td><span class="sjc-no">✗</span> About $300 per year to participate</td><td><span class="sjc-no">✗</span> $0, but pricing is unpredictable</td></tr>
+          <tr><th scope="row">Lead exclusivity</th><td class="us"><span class="sjc-yes">✓</span> 100% yours, never shared</td><td><span class="sjc-no">✗</span> Shared with 3–5 competing pros</td><td><span class="sjc-no">✗</span> Often shared with multiple pros</td></tr>
+          <tr><th scope="row">Vetting before you pay</th><td class="us"><span class="sjc-yes">✓</span> Personally verified by a real person, every time</td><td><span class="sjc-no">✗</span> Automated intake, minimal vetting</td><td><span class="sjc-no">✗</span> Automated intake, minimal vetting</td></tr>
+          <tr><th scope="row">Charged for leads that ghost you</th><td class="us"><span class="sjc-yes">✓</span> Never. Unresponsive leads are filtered out first</td><td><span class="sjc-no">✗</span> Yes, full price even if they never reply</td><td><span class="sjc-no">✗</span> Yes, commonly reported by contractors</td></tr>
+          <tr><th scope="row">Est. cost per closed job*</th><td class="us"><span class="sjc-yes">✓</span> About $230 with one exclusive, pre-qualified lead</td><td><span class="sjc-no">✗</span> About $1,300+ with odds split across shared pros</td><td><span class="sjc-no">✗</span> About $1,000+, often 3–4 leads per job won</td></tr>
+          <tr><th scope="row">Contracts / commitment</th><td class="us"><span class="sjc-yes">✓</span> None. Pay only as leads are delivered</td><td><span class="sjc-no">✗</span> Annual membership commitment</td><td><span class="sjc-no">✗</span> No contract, but volatile per-lead pricing</td></tr>
+          <tr><th scope="row">Who you're working with</th><td class="us"><span class="sjc-yes">✓</span> A local, hands-on operator who knows the trades</td><td><span class="sjc-no">✗</span> National call center</td><td><span class="sjc-no">✗</span> National marketplace app</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sjc-note">Angi (HomeAdvisor) and Thumbtack figures reflect publicly reported 2026 industry pricing and contractor-reported experiences. *Estimated cost per closed job accounts for lead sharing and reported close rates: national platforms typically split each lead across 3–5 competing contractors and report that only 10–30% of leads convert, so several paid leads are often needed to win one job. Because our leads are exclusive and pre-qualified before you pay, fewer leads are needed for the same result.</p>
   </div>
 </section>
 
@@ -348,12 +445,13 @@ function contractorsPage() {
   <div class="container">
     <h2>Questions Contractors Ask Us</h2>
     <div class="accordion">
-      <details><summary>What counts as a qualified lead?</summary><p><mark>[EDIT: e.g. A real homeowner in your service area, asking for work in your trade, with a working phone number or email.]</mark></p></details>
-      <details><summary>Are leads shared with other contractors?</summary><p><mark>[EDIT: Exclusive, or shared with up to X contractors?]</mark></p></details>
-      <details><summary>How do I receive leads?</summary><p><mark>[EDIT: Text, email, or both, and how fast.]</mark></p></details>
-      <details><summary>What if a lead is bad?</summary><p><mark>[EDIT: e.g. If it's a duplicate, out of your area, or can't be reached, tell us and you won't be charged.]</mark></p></details>
-      <details><summary>Can I limit how many leads I get?</summary><p><mark>[EDIT]</mark></p></details>
-      <details><summary>Is there a contract or sign-up fee?</summary><p><mark>[EDIT]</mark></p></details>
+      <details><summary>What counts as a qualified lead?</summary><p>A homeowner whose contact information we've confirmed is real and reachable, who we've spoken with directly about the scope of the job, whose property is in your service area, and whose project matches your trade and capacity.</p></details>
+      <details><summary>Are leads shared with other contractors?</summary><p>No. Every lead is 100% yours and never shared with competing contractors.</p></details>
+      <details><summary>Do I pay for leads that never respond?</summary><p>No. We confirm every homeowner is reachable and talk with them before a lead is sent, so unresponsive leads are filtered out before you ever pay.</p></details>
+      <details><summary>How do I receive leads?</summary><p>Qualified leads are sent directly to you, with enough detail about the homeowner and the project to call them prepared.</p></details>
+      <details><summary>Is there a membership, sign-up fee, or contract?</summary><p>No membership, no sign-up fee, and no contract. You pay only as leads are delivered, plus the referral percentage on jobs that close.</p></details>
+      <details><summary>Do I have to report closed jobs?</summary><p>Please let us know when a referred job closes. We also follow up with homeowners ourselves and invoice accordingly.</p></details>
+      <details><summary>How do I pay?</summary><p>Invoices are sent electronically. Pay by credit/debit card or bank transfer (ACH), with no processing fees or surcharges.</p></details>
     </div>
   </div>
 </section>
@@ -361,9 +459,11 @@ function contractorsPage() {
 <section class="section contractors" id="apply">
   <div class="container">
     <h2>Apply to join our network</h2>
-    <p class="section-sub">We'll be in touch after reviewing your application.</p>
+    <p class="section-sub">Tell us your trade and where you're based. Once you're in our network, you're eligible to start receiving qualified leads right away.</p>
 
     ${contractorForm()}
+
+    <p class="sjc-contact">Prefer to talk first? Call or text <a href="tel:${TEL}">609-605-8851</a> or email <a href="mailto:southjerseyhomerepairsllc@gmail.com">southjerseyhomerepairsllc@gmail.com</a>.</p>
   </div>
 </section>
 
@@ -372,6 +472,107 @@ function contractorsPage() {
 <div hidden aria-hidden="true">
   ${leadForm()}
 </div>
+
+` + footer();
+}
+
+// ---------- service areas ----------
+const AREAS = [
+  {
+    county: "Camden County",
+    towns: ["Audubon", "Audubon Park", "Barrington", "Bellmawr", "Berlin", "Berlin Township", "Brooklawn", "Camden",
+      "Cherry Hill", "Chesilhurst", "Clementon", "Collingswood", "Gibbsboro", "Gloucester City", "Gloucester Township",
+      "Haddon Heights", "Haddon Township", "Haddonfield", "Hi-Nella", "Laurel Springs", "Lawnside", "Lindenwold",
+      "Magnolia", "Merchantville", "Mount Ephraim", "Oaklyn", "Pennsauken", "Pine Hill", "Runnemede", "Somerdale",
+      "Stratford", "Tavistock", "Voorhees", "Waterford", "Winslow", "Woodlynne"],
+    communities: "Including communities like Blackwood, Sicklerville, Atco, Erial, West Berlin, and Westmont."
+  },
+  {
+    county: "Gloucester County",
+    towns: ["Clayton", "Deptford", "East Greenwich", "Elk", "Franklin", "Glassboro", "Greenwich", "Harrison", "Logan",
+      "Mantua", "Monroe", "National Park", "Newfield", "Paulsboro", "Pitman", "South Harrison", "Swedesboro",
+      "Washington Township", "Wenonah", "West Deptford", "Westville", "Woodbury", "Woodbury Heights", "Woolwich"],
+    communities: "Including communities like Sewell, Mullica Hill, Williamstown, Turnersville, Gibbstown, Mickleton, Thorofare, and Franklinville."
+  }
+];
+
+function serviceAreasPage() {
+  const counties = AREAS.map((a) => `    <div class="card sja-county">
+      <h2>${esc(a.county)}</h2>
+      <ul class="sja-towns">${a.towns.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
+      <p class="sja-communities">${esc(a.communities)}</p>
+    </div>`).join("\n");
+  const services = trades.map((t) => `<li><a href="/${t.slug}">${esc(t.name)}</a></li>`).join("");
+  return head({
+    title: "Service Areas: Camden & Gloucester County, NJ | South Jersey Home Repairs",
+    description: "We match homeowners with licensed local contractors across Camden and Gloucester counties, NJ, including Cherry Hill, Voorhees, Glassboro, Washington Township, Deptford, and more.",
+    canonical: "/service-areas"
+  }) + header("service-areas") + `
+<style>
+  .sja-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .sja-towns { list-style: none; padding: 0; margin: .75rem 0 0; columns: 2; column-gap: 1.5rem; }
+  .sja-towns li { padding: .3rem 0; border-bottom: 1px solid #e6eaee; break-inside: avoid; }
+  .sja-communities { margin-top: 1rem; font-size: .95rem; color: #55636e; }
+  .sja-services { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: .6rem; }
+  .sja-services a { display: block; padding: .75rem 1rem; border: 1px solid #dde3e8; border-radius: 8px; background: #fff; text-decoration: none; font-weight: 600; color: inherit; }
+  .sja-services a:hover { border-color: currentColor; }
+  @media (max-width: 760px) { .sja-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 420px) { .sja-towns { columns: 1; } }
+</style>
+
+<section class="hero sjn-page-hero">
+  <div class="container">
+    <div class="hero-copy">
+      <h1>Service areas in South Jersey</h1>
+      <p class="hero-sub">We're focused on Camden and Gloucester counties, where we've lived, worked, and built our contractor network. Many of the contractors we work with also take jobs in the surrounding areas, so if you're nearby, reach out anyway.</p>
+      <a href="#get-matched" class="hero-contractor-link">Get matched with a local pro →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sja-grid">
+${counties}
+    </div>
+  </div>
+</section>
+
+<section class="section matchmaker">
+  <div class="container">
+    <h2>Outside Camden or Gloucester County?</h2>
+    <p class="sjn-prose">If you're in a neighboring county, like Burlington, Salem, Atlantic, or Cumberland, tell us about your project. We'll let you know if one of our contractors covers your town.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Find a pro for your project</h2>
+    <p class="sjn-prose">Choose a service to see common jobs and get matched with a licensed local contractor.</p>
+    <ul class="sja-services">${services}</ul>
+  </div>
+</section>
+
+<section class="hero" id="get-matched">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <h2>Ready to get matched?</h2>
+      <p class="hero-sub">Tell us what needs fixing and we'll match you with a licensed, local contractor we'd call for our own home.</p>
+      <a href="#contractors" class="hero-contractor-link">Are you a contractor? Join our network →</a>
+    </div>
+
+    ${leadForm()}
+  </div>
+</section>
+
+<section class="section contractors" id="contractors">
+  <div class="container">
+    <h2>Are You a Contractor?</h2>
+    <p class="section-sub">Join our network and get matched with homeowners in Camden and Gloucester counties looking for licensed, reliable pros.</p>
+
+    ${contractorForm()}
+  </div>
+</section>
 
 ` + footer();
 }
@@ -388,6 +589,7 @@ console.log("Building pages...");
 trades.forEach((t) => write(`${t.slug}/index.html`, tradePage(t)));
 write("about/index.html", aboutPage());
 write("contractors/index.html", contractorsPage());
+write("service-areas/index.html", serviceAreasPage());
 
 // Header for your home page (paste into index.html)
 write("snippets/home-header.html", `<!-- STEP 1: In <head>, right after your css/style.css line, add: -->
@@ -399,10 +601,10 @@ ${header()}
 <script src="/js/nav.js"></script>
 `);
 
-const urls = ["/", "/about", "/contractors", ...trades.map((t) => "/" + t.slug)];
+const urls = ["/", "/about", "/contractors", "/service-areas", ...trades.map((t) => "/" + t.slug)];
 write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url><loc>${DOMAIN}${u}</loc></url>`).join("\n")}
 </urlset>
 `);
-console.log(`Done: ${trades.length} trade pages + about + contractors.`);
+console.log(`Done: ${trades.length} trade pages + about + contractors + service areas.`);
