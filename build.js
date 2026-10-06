@@ -259,14 +259,16 @@ function aboutPage() {
 <section class="section">
   <div class="container sjn-prose">
     <h2>Why I started this</h2>
-    <p>I've lived and networked in South Jersey for more than 30 years and spent over 15 years working in the trade industry. <mark>[EDIT: Add the moment or pattern that made you start this. For example, friends and neighbors always asking you who to call, or seeing homeowners make five phone calls to find one contractor who was available.]</mark></p>
-    <p><mark>[EDIT: One or two sentences on what you wanted to fix and why it matters to you.]</mark></p>
+    <p>I've spent my whole life living and networking in South Jersey, more than 30 years, and over 15 of those years working in the trade industry. A lot of my friends and family work in the trades too, so I've seen up close how much skill and hard work goes into doing a job right.</p>
+    <p>I've also spent more than 8 years working professionally in real estate. Along the way, I met homeowner after homeowner with the same worry: they needed work done and didn't know who to trust. They'd call around, wait on callbacks, and still feel unsure about who would actually show up.</p>
+    <p>That's why I started South Jersey Home Repairs. I want to be the right matchmaker for both sides. From my time in the trades, I know how hard it can be for good contractors to find steady, reliable work. And from working with homeowners, I know trust is one of the hardest parts of hiring someone to work on your home.</p>
+    <p>Every match I make has to work for the homeowner and the contractor. I wouldn't make it far in this business if I couldn't help both sides, and I wouldn't want to.</p>
 
     <h2>What we do</h2>
     <p>You tell us what needs fixing. We match you with a licensed contractor who does that kind of work in your area, and they reach out to you directly, usually within 24 hours. You work out the details and pricing with them.</p>
 
     <h2>How we choose contractors</h2>
-    <p>Every contractor in our network is licensed and established in South Jersey, and someone we'd call for our own home. <mark>[EDIT: Add how you vet them, e.g. checking licenses and insurance, references, or working with them yourself.]</mark></p>
+    <p>Every contractor in our network is someone I either know personally or have connected with personally. Through my years in the trades and in real estate, I've built relationships with contractors I've used, and would use again, for my own home and for the homes of friends and family. I only work with contractors who are licensed and insured, and who are reliable: ready, willing, and able to do the work.</p>
 
     <h2>Why it's free for homeowners</h2>
     <p>Contractors pay us for the referral, not you. There's no added fee baked into your quote, and no obligation to hire anyone.</p>
