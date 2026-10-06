@@ -10,8 +10,8 @@ const path = require("path");
 const trades = require("./data/trades.js");
 
 const DOMAIN = "https://southjerseyhomerepairs.com";
-const PHONE = "(609) 605-8851";
-const TEL = "6096058851";
+const PHONE = "(856) 318-9421";
+const TEL = "8563189421";
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
@@ -468,7 +468,7 @@ function contractorsPage() {
 
     ${contractorForm()}
 
-    <p class="sjc-contact">Prefer to talk first? Call or text <a href="tel:${TEL}">609-605-8851</a> or email <a href="mailto:southjerseyhomerepairsllc@gmail.com">southjerseyhomerepairsllc@gmail.com</a>.</p>
+    <p class="sjc-contact">Prefer to talk first? Call or text <a href="tel:${TEL}">856-318-9421</a> or email <a href="mailto:southjerseyhomerepairsllc@gmail.com">southjerseyhomerepairsllc@gmail.com</a>.</p>
   </div>
 </section>
 
