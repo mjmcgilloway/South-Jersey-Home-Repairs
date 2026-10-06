@@ -428,23 +428,21 @@ function contractorsPage() {
 
 <section class="section">
   <div class="container">
-    <h2>How we compare to national platforms</h2>
-    <p class="sjc-lead">It's not just the sticker price per lead. It's what you actually get for it.</p>
-    <div class="sjc-table-wrap">
+    <h2>What you get with South Jersey Home Repairs</h2>
+    <p class="sjc-lead">It's not just the price per lead. It's what you actually get for it.</p>
+    <div class="sjc-table-wrap" style="max-width:820px;margin:1rem auto">
       <table class="sjc-table">
-        <thead><tr><th></th><th>South Jersey Home Repairs</th><th>Angi / HomeAdvisor</th><th>Thumbtack</th></tr></thead>
         <tbody>
-          <tr><th scope="row">Membership fee</th><td class="us"><span class="sjc-yes">✓</span> $0, never a membership</td><td><span class="sjc-no">✗</span> About $300 per year to participate</td><td><span class="sjc-no">✗</span> $0, but pricing is unpredictable</td></tr>
-          <tr><th scope="row">Lead exclusivity</th><td class="us"><span class="sjc-yes">✓</span> 100% yours, never shared</td><td><span class="sjc-no">✗</span> Shared with 3–5 competing pros</td><td><span class="sjc-no">✗</span> Often shared with multiple pros</td></tr>
-          <tr><th scope="row">Vetting before you pay</th><td class="us"><span class="sjc-yes">✓</span> Personally verified by a real person, every time</td><td><span class="sjc-no">✗</span> Automated intake, minimal vetting</td><td><span class="sjc-no">✗</span> Automated intake, minimal vetting</td></tr>
-          <tr><th scope="row">Charged for leads that ghost you</th><td class="us"><span class="sjc-yes">✓</span> Never. Unresponsive leads are filtered out first</td><td><span class="sjc-no">✗</span> Yes, full price even if they never reply</td><td><span class="sjc-no">✗</span> Yes, commonly reported by contractors</td></tr>
-          <tr><th scope="row">Est. cost per closed job*</th><td class="us"><span class="sjc-yes">✓</span> About $230 with one exclusive, pre-qualified lead</td><td><span class="sjc-no">✗</span> About $1,300+ with odds split across shared pros</td><td><span class="sjc-no">✗</span> About $1,000+, often 3–4 leads per job won</td></tr>
-          <tr><th scope="row">Contracts / commitment</th><td class="us"><span class="sjc-yes">✓</span> None. Pay only as leads are delivered</td><td><span class="sjc-no">✗</span> Annual membership commitment</td><td><span class="sjc-no">✗</span> No contract, but volatile per-lead pricing</td></tr>
-          <tr><th scope="row">Who you're working with</th><td class="us"><span class="sjc-yes">✓</span> A local, hands-on operator who knows the trades</td><td><span class="sjc-no">✗</span> National call center</td><td><span class="sjc-no">✗</span> National marketplace app</td></tr>
+          <tr><th scope="row">Membership fee</th><td class="us"><span class="sjc-yes">✓</span> $0, never a membership</td></tr>
+          <tr><th scope="row">Lead exclusivity</th><td class="us"><span class="sjc-yes">✓</span> 100% yours, never shared</td></tr>
+          <tr><th scope="row">Vetting before you pay</th><td class="us"><span class="sjc-yes">✓</span> Personally verified by a real person, every time</td></tr>
+          <tr><th scope="row">Charged for leads that ghost you</th><td class="us"><span class="sjc-yes">✓</span> Never. Unresponsive leads are filtered out first</td></tr>
+          <tr><th scope="row">Est. cost per closed job</th><td class="us"><span class="sjc-yes">✓</span> About $230 with one exclusive, pre-qualified lead</td></tr>
+          <tr><th scope="row">Contracts / commitment</th><td class="us"><span class="sjc-yes">✓</span> None. Pay only as leads are delivered</td></tr>
+          <tr><th scope="row">Who you're working with</th><td class="us"><span class="sjc-yes">✓</span> A local, hands-on operator who knows the trades</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="sjc-note">Angi (HomeAdvisor) and Thumbtack figures reflect publicly reported 2026 industry pricing and contractor-reported experiences. *Estimated cost per closed job accounts for lead sharing and reported close rates: national platforms typically split each lead across 3–5 competing contractors and report that only 10–30% of leads convert, so several paid leads are often needed to win one job. Because our leads are exclusive and pre-qualified before you pay, fewer leads are needed for the same result.</p>
   </div>
 </section>
 
