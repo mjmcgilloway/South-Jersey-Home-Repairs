@@ -317,19 +317,21 @@ function contractorsPage() {
   }) + header("contractors") + `
 <style>
   .sjc-lead { max-width: 760px; }
-  .sjc-table-wrap { overflow-x: auto; margin: 1rem 0; }
-  .sjc-table { width: 100%; border-collapse: collapse; background: #fff; font-size: .95rem; }
-  .sjc-table th, .sjc-table td { padding: .75rem .9rem; border: 1px solid #dde3e8; text-align: left; vertical-align: top; }
+  .sjc-table-wrap { overflow-x: auto; margin: 1rem 0; border-radius: 8px; }
+  .sjc-table { width: 100%; border-collapse: collapse; background: #fff; color: #1f2937; font-size: .95rem; }
+  .sjc-table th, .sjc-table td { padding: .75rem .9rem; border: 1px solid #dde3e8; text-align: left; vertical-align: top; color: #1f2937; }
   .sjc-table thead th { background: #1e2f4d; color: #fff; }
   .sjc-table tbody tr:nth-child(even) { background: #f6f8f9; }
   .sjc-table .us { font-weight: 600; }
-  .sjc-yes { color: #3b6b2a; font-weight: 700; }
-  .sjc-no { color: #a3342b; font-weight: 700; }
+  .sjc-yes { color: #3b6b2a !important; font-weight: 700; }
+  .sjc-no { color: #a3342b !important; font-weight: 700; }
   .sjc-fees { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
   .sjc-fees ul { margin: .5rem 0 0; padding-left: 1.2rem; columns: 2; column-gap: 1.25rem; }
   .sjc-fees li { margin-bottom: .3rem; break-inside: avoid; }
-  .sjc-example { background: #f3f6ef; border-left: 4px solid #6b8e3a; padding: .9rem 1rem; border-radius: 4px; max-width: 760px; }
-  .sjc-note { font-size: .85rem; color: #5b6670; max-width: 900px; }
+  .card .sjc-checks li, .sjc-fees li { color: #374151; }
+  .sjc-example { background: #f3f6ef; color: #1f2937; border-left: 4px solid #6b8e3a; padding: .9rem 1rem; border-radius: 4px; max-width: 760px; }
+  .sjc-example strong { color: #1f2937; }
+  .sjc-note { font-size: .85rem; opacity: .8; max-width: 900px; }
   .sjc-checks { margin: .5rem 0 0; padding-left: 1.2rem; }
   .sjc-checks li { margin-bottom: .35rem; }
   .sjc-contact { margin-top: 1rem; }
@@ -484,23 +486,27 @@ const AREAS = [
       "Cherry Hill", "Chesilhurst", "Clementon", "Collingswood", "Gibbsboro", "Gloucester City", "Gloucester Township",
       "Haddon Heights", "Haddon Township", "Haddonfield", "Hi-Nella", "Laurel Springs", "Lawnside", "Lindenwold",
       "Magnolia", "Merchantville", "Mount Ephraim", "Oaklyn", "Pennsauken", "Pine Hill", "Runnemede", "Somerdale",
-      "Stratford", "Tavistock", "Voorhees", "Waterford", "Winslow", "Woodlynne"],
-    communities: "Including communities like Blackwood, Sicklerville, Atco, Erial, West Berlin, and Westmont."
+      "Stratford", "Tavistock", "Voorhees", "Waterford", "Winslow", "Woodlynne",
+      // communities and neighborhoods people search by name
+      "Ashland", "Atco", "Blackwood", "Blenheim", "Blue Anchor", "Braddock", "Cedar Brook", "Chews Landing", "Echelon",
+      "Erial", "Glendora", "Kirkwood", "Sicklerville", "Tansboro", "West Berlin", "Westmont"]
   },
   {
     county: "Gloucester County",
     towns: ["Clayton", "Deptford", "East Greenwich", "Elk", "Franklin", "Glassboro", "Greenwich", "Harrison", "Logan",
       "Mantua", "Monroe", "National Park", "Newfield", "Paulsboro", "Pitman", "South Harrison", "Swedesboro",
-      "Washington Township", "Wenonah", "West Deptford", "Westville", "Woodbury", "Woodbury Heights", "Woolwich"],
-    communities: "Including communities like Sewell, Mullica Hill, Williamstown, Turnersville, Gibbstown, Mickleton, Thorofare, and Franklinville."
+      "Washington Township", "Wenonah", "West Deptford", "Westville", "Woodbury", "Woodbury Heights", "Woolwich",
+      // communities and neighborhoods people search by name
+      "Almonesson", "Beckett", "Bridgeport", "Cecil", "Clarksboro", "Ewan", "Franklinville", "Gibbstown", "Grenloch",
+      "Harrisonville", "Hurffville", "Malaga", "Mickleton", "Mount Royal", "Mullica Hill", "Oak Valley", "Richwood",
+      "Sewell", "Thorofare", "Turnersville", "Williamstown"]
   }
 ];
 
 function serviceAreasPage() {
-  const counties = AREAS.map((a) => `    <div class="card sja-county">
+  const counties = AREAS.map((a) => `    <div class="sja-county">
       <h2>${esc(a.county)}</h2>
-      <ul class="sja-towns">${a.towns.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
-      <p class="sja-communities">${esc(a.communities)}</p>
+      <ul class="sja-towns">${[...a.towns].sort((x, y) => x.localeCompare(y)).map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
     </div>`).join("\n");
   const services = trades.map((t) => `<li><a href="/${t.slug}">${esc(t.name)}</a></li>`).join("");
   return head({
@@ -509,15 +515,17 @@ function serviceAreasPage() {
     canonical: "/service-areas"
   }) + header("service-areas") + `
 <style>
-  .sja-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .sja-towns { list-style: none; padding: 0; margin: .75rem 0 0; columns: 2; column-gap: 1.5rem; }
-  .sja-towns li { padding: .3rem 0; border-bottom: 1px solid #e6eaee; break-inside: avoid; }
-  .sja-communities { margin-top: 1rem; font-size: .95rem; color: #55636e; }
+  .sja-grid { display: grid; gap: 1.5rem; }
+  .sja-county { background: #fff; color: #1f2937; border-radius: 12px; padding: 1.75rem; text-align: left; }
+  .sja-county h2 { color: #1e2f4d; text-align: left; margin: 0 0 .5rem; }
+  .sja-county h2::after { display: none; }
+  .sja-towns { list-style: none; padding: 0; margin: .75rem 0 0; columns: 4; column-gap: 1.5rem; }
+  .sja-towns li { color: #1f2937; padding: .35rem 0; border-bottom: 1px solid #e6eaee; break-inside: avoid; }
   .sja-services { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: .6rem; }
-  .sja-services a { display: block; padding: .75rem 1rem; border: 1px solid #dde3e8; border-radius: 8px; background: #fff; text-decoration: none; font-weight: 600; color: inherit; }
-  .sja-services a:hover { border-color: currentColor; }
-  @media (max-width: 760px) { .sja-grid { grid-template-columns: 1fr; } }
-  @media (max-width: 420px) { .sja-towns { columns: 1; } }
+  .sja-services a { display: block; padding: .8rem 1rem; border-radius: 8px; background: #fff; color: #1e2f4d; text-decoration: none; font-weight: 600; border: 2px solid transparent; }
+  .sja-services a:hover { border-color: #6b8e3a; }
+  @media (max-width: 900px) { .sja-towns { columns: 3; } }
+  @media (max-width: 600px) { .sja-towns { columns: 2; } }
 </style>
 
 <section class="hero sjn-page-hero">
