@@ -340,7 +340,7 @@ function contractorsPage() {
       <div class="card"><h3 class="sjn-price">$75</h3><p>per qualified lead for higher-ticket and technical trades</p></div>
       <div class="card"><h3 class="sjn-price">5% to 1%</h3><p>of the job value when you close the job, tiered so bigger jobs pay a lower percentage</p></div>
     </div>
-    <p class="sjn-prose">The lead fee you already paid is credited against the closing percentage, so you never pay twice for the same job.</p>
+    <p class="sjn-prose">The lead fee you already paid is credited against the closing percentage.</p>
   </div>
 </section>
 
