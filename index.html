@@ -22,15 +22,46 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="/css/nav.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="#home" class="logo-link">
-      <img src="assets/logo.png" alt="South Jersey Home Repairs" class="logo-icon">
+    <a href="/" class="logo-link">
+      <img src="/assets/logo.png" alt="South Jersey Home Repairs" class="logo-icon">
       <span class="logo">South Jersey <span class="logo-accent">Home Repairs</span></span>
     </a>
+    <button class="sjn-toggle" type="button" aria-expanded="false" aria-controls="sjn">Menu</button>
+    <nav class="sjn" id="sjn" aria-label="Main">
+      <ul class="sjn-list">
+        <li><a href="/about">About us</a></li>
+        <li class="sjn-dd">
+          <button class="sjn-dd-toggle" type="button" aria-expanded="false" aria-controls="sjn-services">Services</button>
+          <ul class="sjn-dd-menu" id="sjn-services">
+          <li><a href="/roofing">Roofing</a></li>
+          <li><a href="/hvac">HVAC</a></li>
+          <li><a href="/plumbing">Plumbing</a></li>
+          <li><a href="/fencing">Fencing</a></li>
+          <li><a href="/electrical">Electrical</a></li>
+          <li><a href="/restoration">Restoration</a></li>
+          <li><a href="/masonry">Masonry</a></li>
+          <li><a href="/lawn-care">Lawn Care</a></li>
+          <li><a href="/tree-removal">Tree Removal</a></li>
+          <li><a href="/gutters">Gutters</a></li>
+          <li><a href="/siding">Siding</a></li>
+          <li><a href="/painting">Painting</a></li>
+          <li><a href="/cleaning-services">Cleaning Services</a></li>
+          <li><a href="/solar">Solar</a></li>
+          <li><a href="/basement-waterproofing">Basement Waterproofing</a></li>
+          <li><a href="/foundation-repair">Foundation Repair</a></li>
+          <li><a href="/mold-remediation">Mold Remediation</a></li>
+          <li><a href="/windows-doors">Windows &amp; Doors</a></li>
+          </ul>
+        </li>
+        <li><a class="sjn-cta" href="/contractors">Contractors</a></li>
+      </ul>
+    </nav>
     <a href="tel:6096058851" class="header-phone">📞 (609) 605-8851</a>
   </div>
 </header>
@@ -299,5 +330,6 @@
 </footer>
 
 <script src="js/script.js"></script>
+<script src="/js/nav.js"></script>
 </body>
 </html>
