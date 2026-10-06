@@ -307,9 +307,6 @@ function aboutPage() {
 }
 
 function contractorsPage() {
-  const low = ["Handyman / General Repair", "Painting", "Landscaping / Lawn Care", "Cleaning Services", "Pest Control", "Gutter Services", "Fencing", "Flooring"];
-  const high = ["Plumbing", "Electrical", "HVAC", "Roofing", "Solar", "Windows & Doors", "Siding", "Concrete / Masonry", "Kitchen & Bath Remodeling", "Water Damage / Restoration", "Foundation Repair", "Tree Removal"];
-  const li = (arr) => arr.map((x) => `<li>${esc(x)}</li>`).join("");
   return head({
     title: "For Contractors | South Jersey Home Repairs",
     description: "Exclusive, personally vetted homeowner leads for South Jersey contractors. No membership, no shared leads, no paying for leads that never respond.",
@@ -375,7 +372,7 @@ function contractorsPage() {
       </div>
       <div class="card">
         <h3>3. You follow up and win the job</h3>
-        <p>You get the lead directly, with enough context to call the homeowner prepared, not cold. The lead fee is charged at this point. If the job closes, the referral percentage applies with your lead fee credited toward it.</p>
+        <p>You get the lead directly, with enough context to call the homeowner prepared, not cold. Before you're ever invoiced, we contact you personally to confirm you'd like the referral. If the job closes, the referral percentage applies with your lead fee credited toward it.</p>
       </div>
       <div class="card">
         <h3>4. Billing is simple</h3>
@@ -393,15 +390,14 @@ function contractorsPage() {
     <div class="sjc-fees">
       <div class="card">
         <h3 class="sjn-price">$50</h3>
-        <p>per qualified lead</p>
-        <ul>${li(low)}</ul>
+        <p>per qualified lead for lower-ticket trades</p>
       </div>
       <div class="card">
         <h3 class="sjn-price">$75</h3>
-        <p>per qualified lead</p>
-        <ul>${li(high)}</ul>
+        <p>per qualified lead for higher-ticket and technical trades</p>
       </div>
     </div>
+    <p class="sjc-lead" style="margin-top:1rem">We'll confirm which fee applies to your trade when you join.</p>
 
     <h3 style="margin-top:2.25rem">Referral percentage on closed jobs</h3>
     <p class="sjc-lead">Applies to every trade once a referred job closes. The lead fee you already paid is credited against what's owed, so you never pay twice for the same job.</p>
