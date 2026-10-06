@@ -45,6 +45,13 @@ function head({ title, description, canonical }) {
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/nav.css">
+<style>
+  /* Line new content up with the site's centered section headings */
+  .sjn-prose { margin-left: auto; margin-right: auto; }
+  .sjc-lead, .sjc-note, .sjc-contact { max-width: 760px; margin-left: auto; margin-right: auto; text-align: center; }
+  .sjc-sub { text-align: center; margin-top: 2.25rem; }
+  .sjc-center { margin-left: auto !important; margin-right: auto !important; }
+</style>
 </head>
 <body>
 `;
@@ -217,7 +224,7 @@ ${cards}
         <p>Describe it in the form above. Chances are we know someone.</p>
       </div>
     </div>
-    <p style="margin-top:1.5rem">We match homeowners with ${esc(t.name.toLowerCase())} pros throughout Camden and Gloucester counties. <a href="/service-areas">See all the towns we serve</a>.</p>
+    <p class="sjc-lead" style="margin-top:1.5rem">We match homeowners with ${esc(t.name.toLowerCase())} pros throughout Camden and Gloucester counties. <a href="/service-areas">See all the towns we serve</a>.</p>
   </div>
 </section>
 
@@ -323,6 +330,7 @@ function contractorsPage() {
   .sjc-yes { color: #3b6b2a !important; font-weight: 700; }
   .sjc-no { color: #a3342b !important; font-weight: 700; }
   .sjc-fees { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .sjc-fees .card { text-align: center; }
   .sjc-fees ul { margin: .5rem 0 0; padding-left: 1.2rem; columns: 2; column-gap: 1.25rem; }
   .sjc-fees li { margin-bottom: .3rem; break-inside: avoid; }
   .card .sjc-checks li, .sjc-fees li { color: #374151; }
@@ -332,7 +340,8 @@ function contractorsPage() {
   .sjc-checks { margin: .5rem 0 0; padding-left: 1.2rem; }
   .sjc-checks li { margin-bottom: .35rem; }
   .sjc-contact { margin-top: 1rem; }
-  @media (max-width: 760px) { .sjc-fees { grid-template-columns: 1fr; } .sjc-fees ul { columns: 1; } }
+  @media (max-width: 760px) { .sjc-fees { grid-template-columns: 1fr; } .sjc-fees .card { text-align: center; }
+  .sjc-fees ul { columns: 1; } }
 </style>
 
 <section class="hero sjn-page-hero">
@@ -385,9 +394,9 @@ function contractorsPage() {
 <section class="section" id="pricing">
   <div class="container">
     <h2>Pricing</h2>
-    <h3>Qualified lead fee by trade</h3>
+    <h3 class="sjc-sub" style="margin-top:0">Qualified lead fee</h3>
     <p class="sjc-lead">A flat fee per qualified, verified lead delivered, whether or not the job closes.</p>
-    <div class="sjc-fees">
+    <div class="sjc-fees sjc-center" style="max-width:760px">
       <div class="card">
         <h3 class="sjn-price">$50</h3>
         <p>per qualified lead for lower-ticket trades</p>
@@ -399,9 +408,9 @@ function contractorsPage() {
     </div>
     <p class="sjc-lead" style="margin-top:1rem">We'll confirm which fee applies to your trade when you join.</p>
 
-    <h3 style="margin-top:2.25rem">Referral percentage on closed jobs</h3>
+    <h3 class="sjc-sub">Referral percentage on closed jobs</h3>
     <p class="sjc-lead">Applies to every trade once a referred job closes. The lead fee you already paid is credited against what's owed, so you never pay twice for the same job.</p>
-    <div class="sjc-table-wrap" style="max-width:520px">
+    <div class="sjc-table-wrap" style="max-width:520px;margin:1rem auto">
       <table class="sjc-table">
         <thead><tr><th>Closed job value</th><th>Referral percentage</th></tr></thead>
         <tbody>
@@ -413,7 +422,7 @@ function contractorsPage() {
         </tbody>
       </table>
     </div>
-    <p class="sjc-example"><strong>Example:</strong> A $6,000 job closes at the 3% tier, so $180 is owed. The $75 lead fee you already paid is credited, leaving a balance of $105.</p>
+    <p class="sjc-example sjc-center"><strong>Example:</strong> A $6,000 job closes at the 3% tier, so $180 is owed. The $75 lead fee you already paid is credited, leaving a balance of $105.</p>
   </div>
 </section>
 
@@ -545,14 +554,14 @@ ${counties}
 <section class="section matchmaker">
   <div class="container">
     <h2>Outside Camden or Gloucester County?</h2>
-    <p class="sjn-prose">If you're in a neighboring county, like Burlington, Salem, Atlantic, or Cumberland, tell us about your project. We'll let you know if one of our contractors covers your town.</p>
+    <p class="sjc-lead">If you're in a neighboring county, like Burlington, Salem, Atlantic, or Cumberland, tell us about your project. We'll let you know if one of our contractors covers your town.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
     <h2>Find a pro for your project</h2>
-    <p class="sjn-prose">Choose a service to see common jobs and get matched with a licensed local contractor.</p>
+    <p class="sjc-lead">Choose a service to see common jobs and get matched with a licensed local contractor.</p>
     <ul class="sja-services">${services}</ul>
   </div>
 </section>
