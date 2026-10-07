@@ -16,6 +16,13 @@ const DOMAIN = "https://southjerseyhomerepairs.com";
 const PHONE = "(856) 318-9421";
 const TEL = "8563189421";
 
+// ---------- reviews link ----------
+// southjerseyhomerepairs.com/reviews sends people to the address below.
+// To send reviews somewhere else (a Facebook page, another review site),
+// change REVIEW_URL and REVIEW_SITE here. Nothing else needs to change.
+const REVIEW_URL = "https://g.page/r/CapcklbsBlEhECE/review";
+const REVIEW_SITE = "Google";   // used in the button: "Leave a Google review"
+
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 // The service list for both forms, built from data/trades.js so it can
@@ -42,7 +49,7 @@ function tradeOptions(trade = null) {
 }
 
 // ---------- shared ----------
-function head({ title, description, canonical }) {
+function head({ title, description, canonical, noindex = false }) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +57,7 @@ function head({ title, description, canonical }) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<link rel="canonical" href="${DOMAIN}${canonical}">
+<link rel="canonical" href="${DOMAIN}${canonical}">${noindex ? '\n<meta name="robots" content="noindex">' : ""}
 <meta property="og:type" content="website">
 <meta property="og:url" content="${DOMAIN}${canonical}">
 <meta property="og:site_name" content="South Jersey Home Repairs">
@@ -632,6 +639,58 @@ ${counties}
 ` + footer();
 }
 
+// ---------- reviews ----------
+// A small branded page that forwards to your review form. Texting or
+// emailing southjerseyhomerepairs.com/reviews shows your logo and name in
+// the link preview (a direct Google link shows a blank gray box).
+function reviewsPage() {
+  const url = JSON.stringify(REVIEW_URL);
+  return head({
+    title: "Review South Jersey Home Repairs",
+    description: "Share your experience with South Jersey Home Repairs. It takes about a minute.",
+    canonical: "/reviews",
+    noindex: true
+  }).replace('<meta property="og:image" content="' + DOMAIN + '/assets/share.png">',
+    '<meta property="og:image" content="' + DOMAIN + '/assets/share.png">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">') + header() + `
+<style>
+  .sjr-copy { margin: 0 auto; text-align: center; }
+  .sjr-btn { padding: 14px 30px; font-size: 1.05rem; margin-top: 1rem; }
+  .sjr-note { margin-top: 1.25rem; font-size: .9rem; }
+</style>
+
+<section class="hero sjn-page-hero">
+  <div class="container">
+    <div class="hero-copy sjr-copy">
+      <p class="hero-eyebrow">Reviews</p>
+      <h1>Thanks for working with South Jersey Home Repairs</h1>
+      <p class="hero-sub">A quick review helps other South Jersey homeowners and contractors find us. It takes about a minute.</p>
+      <a class="submit-btn sjn-inline-btn sjr-btn" href="${esc(REVIEW_URL)}">Leave a ${esc(REVIEW_SITE)} review</a>
+      <p class="sjr-note" id="sjr-note" hidden>Taking you to ${esc(REVIEW_SITE)} now. If nothing happens, tap the button above.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Hidden copy of the homeowner form. Your js/script.js expects it on
+     every page; this keeps it from erroring here. Safe to leave as is. -->
+<div hidden aria-hidden="true">
+  ${leadForm()}
+</div>
+
+<script>
+  // Forward real visitors to the review form after a moment. Link-preview
+  // robots (the ones that build the picture in a text message) are left
+  // on this page so the preview shows your branding.
+  (function () {
+    if (/bot|crawl|spider|facebookexternalhit|whatsapp|slack|preview|embed/i.test(navigator.userAgent)) return;
+    var note = document.getElementById("sjr-note");
+    if (note) note.hidden = false;
+    setTimeout(function () { window.location.replace(${url}); }, 1200);
+  })();
+</script>
+
+` + footer();
+}
+
 // ---------- home page ----------
 // index.html is written by hand, but its four trade lists (menu, form
 // buttons, contractor dropdown, footer links) sit between marker comments
@@ -682,6 +741,8 @@ trades.forEach((t) => write(`${t.slug}/index.html`, tradePage(t)));
 write("about/index.html", aboutPage());
 write("contractors/index.html", contractorsPage());
 write("service-areas/index.html", serviceAreasPage());
+write("reviews/index.html", reviewsPage());
+write("review/index.html", reviewsPage());   // same page, in case someone drops the "s"
 syncHomePage();
 
 // Header for your home page (paste into index.html)
