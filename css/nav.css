@@ -17,12 +17,15 @@
 .sjn-dd-toggle[aria-expanded="true"]::after { transform: rotate(-135deg) translateY(-2px); }
 .sjn-dd-menu {
   display: none; position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%);
-  width: 470px; list-style: none; margin: 0; padding: .6rem; z-index: 100;
+  width: 620px; max-width: calc(100vw - 40px); list-style: none; margin: 0; padding: .6rem; z-index: 100;
   background: #fff; border: 1px solid #e2e6ea; border-radius: 10px; box-shadow: 0 16px 36px rgba(0,0,0,.18);
-  grid-template-columns: 1fr 1fr; gap: 2px;
+  /* Three columns keeps the menu short as trades are added. If it ever
+     outgrows the screen, it scrolls instead of running off the bottom. */
+  grid-template-columns: repeat(3, 1fr); gap: 2px;
+  max-height: calc(100vh - 120px); overflow-y: auto;
 }
 .sjn-dd-toggle[aria-expanded="true"] + .sjn-dd-menu { display: grid; }
-.sjn-dd-menu a { display: block; padding: .55rem .7rem; border-radius: 6px; color: #1f2937; text-decoration: none; font-weight: 500; font-size: .95rem; }
+.sjn-dd-menu a { display: block; padding: .5rem .7rem; border-radius: 6px; color: #1f2937; text-decoration: none; font-weight: 500; font-size: .92rem; }
 .sjn-dd-menu a:hover, .sjn-dd-menu a[aria-current="page"] { background: #f1f4f7; }
 .sjn-list > li > a.sjn-cta { border: 2px solid currentColor; margin-left: .4rem; padding: .65rem 1rem; }
 .sjn-toggle { display: none; }
@@ -35,7 +38,7 @@
   .sjn-list { flex-direction: column; align-items: stretch; }
   .sjn-list > li > a, .sjn-dd-toggle { width: 100%; justify-content: space-between; padding: .9rem .25rem; border-radius: 0; }
   .sjn-list > li > a.sjn-cta { margin: .75rem 0 0; justify-content: center; border-radius: 6px; }
-  .sjn-dd-menu { position: static; transform: none; width: 100%; box-shadow: none; }
+  .sjn-dd-menu { position: static; transform: none; width: 100%; max-width: none; max-height: none; overflow: visible; box-shadow: none; grid-template-columns: 1fr 1fr; }
   .site-header .header-phone { order: 5; }
 }
 @media (max-width: 480px) { .sjn-dd-menu { grid-template-columns: 1fr; } }
@@ -54,4 +57,12 @@ form[data-preselect] .form-step[data-step="1"] { display: none !important; }
 .sjn-inline-btn { display: inline-block; width: auto; text-decoration: none; }
 .sjn-footer-links { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; margin-bottom: 1rem; font-size: .9rem; }
 .sjn-footer-links a { color: inherit; }
+.sjn-footer-links { justify-content: center; }
+
+/* ----- "What's included" section on trade pages that have one ----- */
+.sjn-scope .sjc-lead { margin-bottom: 1.75rem; }
+.sjn-scope-list { margin: .5rem 0 0; padding-left: 1.15rem; color: #374151; }
+.sjn-scope-list li { margin-bottom: .45rem; }
+.sjn-scope-list li:last-child { margin-bottom: 0; }
+.sjn-scope .sjn-scope-note { margin: 1.75rem auto 0; }
 mark { background: #fff3c4; color: #1f2937; padding: 0 .2em; }

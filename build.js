@@ -1,7 +1,10 @@
 // ------------------------------------------------------------------
 // South Jersey Home Repairs: page builder
 // Run:  node build.js   (Netlify runs this automatically on deploy)
-// Creates /about, /contractors, and one page per trade in data/trades.js
+// Creates /about, /contractors, /service-areas, and one page per trade
+// in data/trades.js. Also refreshes the trade lists on the home page
+// (index.html) and rewrites sitemap.xml, so data/trades.js is the only
+// file you edit to add a trade.
 // Uses your existing css/style.css and js/script.js, so the forms
 // work and save to Airtable exactly like the home page forms.
 // ------------------------------------------------------------------
@@ -15,11 +18,28 @@ const TEL = "8563189421";
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-// The service list from your home page form, in the same order.
-// Keep this in sync with index.html.
-const SERVICES = ["Roofing", "HVAC", "Plumbing", "Fencing", "Electrical", "Restoration", "Masonry", "Lawncare",
-  "Tree Removal", "Gutters", "Siding", "Painting", "Cleaning Services", "Solar", "Basement Waterproofing",
-  "Foundation Issues", "Mold", "Windows / Doors", "Other"];
+// The service list for both forms, built from data/trades.js so it can
+// never fall out of step. "Other" always stays last.
+const SERVICES = [...trades.map((t) => t.value), "Other"];
+
+// Small wording helpers for the trade pages.
+const noun = (t) => t.noun || t.name.toLowerCase();          // "roofing", "handyman"
+const cred = (t) => t.cred || "a licensed";                   // "a licensed", "an insured"
+const an = (s) => (/^(?:[aeiou]|hvac)/i.test(s) ? "an " : "a ") + s;   // "an electrician", "a roofer"
+
+// ---------- trade lists (shared by every page, including the home page) ----------
+function menuItems(active = "") {
+  return trades.map((t) => `<li><a href="/${t.slug}"${active === t.slug ? ' aria-current="page"' : ""}>${esc(t.name)}</a></li>`).join("\n          ");
+}
+function footerLinks() {
+  return trades.map((t) => `<a href="/${t.slug}">${esc(t.name)}</a>`).join("\n      ");
+}
+function optionButtons() {
+  return SERVICES.map((s) => `            <button type="button" class="option-btn">${esc(s)}</button>`).join("\n");
+}
+function tradeOptions(trade = null) {
+  return SERVICES.map((s) => `        <option${trade && s === trade.value ? " selected" : ""}>${esc(s)}</option>`).join("\n");
+}
 
 // ---------- shared ----------
 function head({ title, description, canonical }) {
@@ -59,7 +79,7 @@ function head({ title, description, canonical }) {
 
 function header(active = "") {
   const cur = (k) => (active === k ? ' aria-current="page"' : "");
-  const items = trades.map((t) => `<li><a href="/${t.slug}"${cur(t.slug)}>${esc(t.name)}</a></li>`).join("\n          ");
+  const items = menuItems(active);
   return `<header class="site-header">
   <div class="container header-inner">
     <a href="/" class="logo-link">
@@ -87,7 +107,7 @@ function header(active = "") {
 }
 
 function footer() {
-  const links = trades.map((t) => `<a href="/${t.slug}">${esc(t.name)}</a>`).join("\n      ");
+  const links = footerLinks();
   return `<footer class="site-footer">
   <div class="container">
     <nav class="sjn-footer-links" aria-label="Services">
@@ -108,7 +128,7 @@ function footer() {
 
 // ---------- your forms (copied from index.html) ----------
 function leadForm(preselect = "") {
-  const buttons = SERVICES.map((s) => `            <button type="button" class="option-btn">${esc(s)}</button>`).join("\n");
+  const buttons = optionButtons();
   return `<div class="hero-form-card">
       <form id="lead-form" novalidate${preselect ? ` data-preselect="${esc(preselect)}"` : ""}>
 
@@ -154,7 +174,7 @@ ${buttons}
 }
 
 function contractorForm(trade = null) {
-  const opts = SERVICES.map((s) => `        <option${trade && s === trade.value ? " selected" : ""}>${esc(s)}</option>`).join("\n");
+  const opts = tradeOptions(trade);
   const placeholder = trade
     ? `        <option value="" disabled>Select a trade</option>`
     : `        <option value="" disabled selected>Select a trade</option>`;
@@ -191,6 +211,30 @@ ${opts}
 }
 
 // ---------- pages ----------
+// Optional "what's included" section. Shows only on trades that have a
+// scope block in data/trades.js (Handyman Services, General Contractor).
+function scopeSection(t) {
+  if (!t.scope) return "";
+  const cols = t.scope.columns.map((c) => `      <div class="card">
+        <h3>${esc(c.title)}</h3>
+        <ul class="sjn-scope-list">
+${c.items.map((i) => `          <li>${esc(i)}</li>`).join("\n")}
+        </ul>
+      </div>`).join("\n");
+  return `<section class="section matchmaker sjn-scope" id="scope">
+  <div class="container">
+    <h2>${esc(t.scope.heading)}</h2>
+    <p class="sjc-lead">${esc(t.scope.intro)}</p>
+    <div class="card-grid">
+${cols}
+    </div>
+    ${t.scope.noteHtml ? `<p class="sjc-lead sjn-scope-note">${t.scope.noteHtml}</p>` : ""}
+  </div>
+</section>
+
+`;
+}
+
 function tradePage(t) {
   const cards = t.jobs.map(([n, d]) => `      <div class="card">
         <h3>${esc(n)}</h3>
@@ -198,7 +242,7 @@ function tradePage(t) {
       </div>`).join("\n");
   return head({
     title: `${t.name} in South Jersey | South Jersey Home Repairs`,
-    description: `Need ${t.name.toLowerCase()} help in South Jersey? Get matched with a licensed local ${t.pro}. Free for homeowners, no obligation.`,
+    description: `Need ${noun(t)} help in South Jersey? Get matched with ${cred(t)} local ${t.pro}. Free for homeowners, no obligation.`,
     canonical: `/${t.slug}`
   }) + header(t.slug) + `
 <section class="hero" id="home">
@@ -207,16 +251,16 @@ function tradePage(t) {
       <p class="hero-eyebrow"><a href="/">Home</a> / ${esc(t.name)}</p>
       <h1>${esc(t.name)} in South Jersey</h1>
       <p class="hero-sub">${esc(t.intro)}</p>
-      <a href="#contractors" class="hero-contractor-link">Are you a ${esc(t.pro)}? Join our network →</a>
+      <a href="#contractors" class="hero-contractor-link">Are you ${esc(an(t.pro))}? Join our network →</a>
     </div>
 
     ${leadForm(t.value)}
   </div>
 </section>
 
-<section class="section repairs">
+${scopeSection(t)}<section class="section repairs">
   <div class="container">
-    <h2>Common ${esc(t.name.toLowerCase())} jobs we match homeowners on</h2>
+    <h2>Common ${esc(noun(t))} jobs we match homeowners on</h2>
     <div class="card-grid">
 ${cards}
       <div class="card">
@@ -224,7 +268,7 @@ ${cards}
         <p>Describe it in the form above. Chances are we know someone.</p>
       </div>
     </div>
-    <p class="sjc-lead" style="margin-top:1.5rem">We match homeowners with ${esc(t.name.toLowerCase())} pros throughout Camden and Gloucester counties. <a href="/service-areas">See all the towns we serve</a>.</p>
+    <p class="sjc-lead" style="margin-top:1.5rem">We match homeowners with ${esc(noun(t))} pros throughout Camden and Gloucester counties. <a href="/service-areas">See all the towns we serve</a>.</p>
   </div>
 </section>
 
@@ -233,7 +277,7 @@ ${cards}
     <h2>How it works</h2>
     <div class="card-grid sjn-steps">
       <div class="card"><h3>1. Tell us about the job</h3><p>It takes about a minute, and it's free.</p></div>
-      <div class="card"><h3>2. We match you</h3><p>We connect you with a licensed ${esc(t.pro)} established in South Jersey.</p></div>
+      <div class="card"><h3>2. We match you</h3><p>We connect you with ${esc(cred(t))} ${esc(t.pro)} established in South Jersey.</p></div>
       <div class="card"><h3>3. They reach out</h3><p>Expect to hear back within 24 hours. You work out the details and pricing directly.</p></div>
     </div>
   </div>
@@ -241,8 +285,8 @@ ${cards}
 
 <section class="section contractors" id="contractors">
   <div class="container">
-    <h2>Do you do ${esc(t.name.toLowerCase())} work?</h2>
-    <p class="section-sub">Join our network and get matched with South Jersey homeowners who need a ${esc(t.pro)}. <a href="/contractors">See how it works</a>.</p>
+    <h2>Do you do ${esc(noun(t))} work?</h2>
+    <p class="section-sub">Join our network and get matched with South Jersey homeowners who need ${esc(an(t.pro))}. <a href="/contractors">See how it works</a>.</p>
 
     ${contractorForm(t)}
   </div>
@@ -588,6 +632,43 @@ ${counties}
 ` + footer();
 }
 
+// ---------- home page ----------
+// index.html is written by hand, but its four trade lists (menu, form
+// buttons, contractor dropdown, footer links) sit between marker comments
+// like <!-- AUTO:services-menu --> ... <!-- /AUTO:services-menu -->.
+// This refills whatever is between each pair from data/trades.js.
+// Everything outside the markers is left exactly as you wrote it.
+function syncHomePage() {
+  const file = path.join(__dirname, "index.html");
+  const blocks = {
+    "services-menu": { indent: "          ", body: menuItems() },
+    "service-buttons": { indent: "            ", body: optionButtons() },
+    "trade-options": { indent: "        ", body: tradeOptions() },
+    "footer-links": { indent: "      ", body: footerLinks() }
+  };
+  let html;
+  try {
+    html = fs.readFileSync(file, "utf8");
+  } catch (err) {
+    console.log("  skipped index.html (file not found)");
+    return;
+  }
+  let changed = 0;
+  for (const [key, b] of Object.entries(blocks)) {
+    const re = new RegExp(`<!-- AUTO:${key} -->[\\s\\S]*?<!-- /AUTO:${key} -->`);
+    if (!re.test(html)) {
+      console.log(`  note: no <!-- AUTO:${key} --> marker in index.html, left that list as is`);
+      continue;
+    }
+    html = html.replace(re, () => `<!-- AUTO:${key} -->\n${b.indent}${b.body.trimStart()}\n${b.indent}<!-- /AUTO:${key} -->`);
+    changed++;
+  }
+  if (changed) {
+    fs.writeFileSync(file, html);
+    console.log(`  updated index.html (${changed} trade lists)`);
+  }
+}
+
 // ---------- write ----------
 function write(rel, html) {
   const file = path.join(__dirname, rel);
@@ -601,6 +682,7 @@ trades.forEach((t) => write(`${t.slug}/index.html`, tradePage(t)));
 write("about/index.html", aboutPage());
 write("contractors/index.html", contractorsPage());
 write("service-areas/index.html", serviceAreasPage());
+syncHomePage();
 
 // Header for your home page (paste into index.html)
 write("snippets/home-header.html", `<!-- STEP 1: In <head>, right after your css/style.css line, add: -->

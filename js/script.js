@@ -80,7 +80,7 @@ form.addEventListener('submit', async (e) => {
 
     goToStepByName('success');
   } catch (err) {
-    errorEl.textContent = 'Something went wrong submitting your info. Please call us at (609) 605-8851.';
+    errorEl.textContent = 'Something went wrong submitting your info. Please call us at (856) 318-9421.';
     errorEl.hidden = false;
     submitBtn.disabled = false;
     submitBtn.textContent = 'Get Connected Today';
@@ -124,7 +124,7 @@ if (contractorForm) {
       contractorForm.reset();
       contractorSuccess.hidden = false;
     } catch (err) {
-      contractorError.textContent = 'Something went wrong submitting your application. Please call us at (609) 605-8851.';
+      contractorError.textContent = 'Something went wrong submitting your application. Please call us at (856) 318-9421.';
       contractorError.hidden = false;
     } finally {
       submitBtn.disabled = false;
