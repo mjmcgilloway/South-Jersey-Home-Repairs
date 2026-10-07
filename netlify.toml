@@ -8,3 +8,17 @@
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
+
+# Short link for Google reviews: southjerseyhomerepairs.com/review
+# To point it somewhere else later, change the "to" address below.
+[[redirects]]
+  from = "/review"
+  to = "https://g.page/r/CapcklbsBlEhECE/review"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/reviews"
+  to = "https://g.page/r/CapcklbsBlEhECE/review"
+  status = 302
+  force = true
