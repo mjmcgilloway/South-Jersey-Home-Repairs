@@ -65,4 +65,19 @@ form[data-preselect] .form-step[data-step="1"] { display: none !important; }
 .sjn-scope-list li { margin-bottom: .45rem; }
 .sjn-scope-list li:last-child { margin-bottom: 0; }
 .sjn-scope .sjn-scope-note { margin: 1.75rem auto 0; }
+
+/* ----- Trade pages: center a short last row of cards -----
+   Three cards across. When the last row has only one or two cards
+   (for example the "Not listed?" card), they sit in the middle instead
+   of hanging off the left. The three "How it works" steps share one row. */
+@media (min-width: 861px) {
+  .card-grid.sjn-center { display: flex; flex-wrap: wrap; justify-content: center; }
+  .card-grid.sjn-center > .card { flex: 0 0 calc((100% - 41px) / 3); }
+  .matchmaker .card-grid.sjn-steps { max-width: none; }
+}
+/* Tablets: steps go two across with the third centered underneath. */
+@media (min-width: 701px) and (max-width: 860px) {
+  .matchmaker .card-grid.sjn-steps { display: flex; flex-wrap: wrap; justify-content: center; }
+  .matchmaker .card-grid.sjn-steps > .card { flex: 0 0 calc((100% - 21px) / 2); }
+}
 mark { background: #fff3c4; color: #1f2937; padding: 0 .2em; }

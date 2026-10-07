@@ -261,7 +261,7 @@ function tradePage(t) {
 ${scopeSection(t)}<section class="section repairs">
   <div class="container">
     <h2>Common ${esc(noun(t))} jobs we match homeowners on</h2>
-    <div class="card-grid">
+    <div class="card-grid sjn-center">
 ${cards}
       <div class="card">
         <h3>Not listed?</h3>
@@ -275,7 +275,7 @@ ${cards}
 <section class="section matchmaker">
   <div class="container">
     <h2>How it works</h2>
-    <div class="card-grid sjn-steps">
+    <div class="card-grid sjn-steps sjn-center">
       <div class="card"><h3>1. Tell us about the job</h3><p>It takes about a minute, and it's free.</p></div>
       <div class="card"><h3>2. We match you</h3><p>We connect you with ${esc(cred(t))} ${esc(t.pro)} established in South Jersey.</p></div>
       <div class="card"><h3>3. They reach out</h3><p>Expect to hear back within 24 hours. You work out the details and pricing directly.</p></div>
