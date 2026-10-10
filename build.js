@@ -11,6 +11,7 @@
 const fs = require("fs");
 const path = require("path");
 const trades = require("./data/trades.js");
+const terms = require("./data/terms.js");
 
 const DOMAIN = "https://southjerseyhomerepairs.com";
 const PHONE = "(856) 318-9421";
@@ -123,6 +124,7 @@ function footer() {
     <p><a href="/service-areas">Service areas: Camden &amp; Gloucester counties</a></p>
     <p>© <span id="year"></span> South Jersey Home Repairs, LLC. All rights reserved. LLC #0451530369</p>
     <p>Phone: <a href="tel:${TEL}">${PHONE.replace(/[()]/g, "").replace(" ", "-")}</a></p>
+    <p class="sjn-legal"><a href="/termsandconditions">Terms and Conditions</a></p>
   </div>
 </footer>
 
@@ -168,6 +170,7 @@ ${buttons}
   <input type="text" name="location" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required>
 </label>
           <button type="submit" class="submit-btn">Get Connected Today</button>
+          <p class="form-terms">By submitting, you agree to our <a href="/termsandconditions">Terms and Conditions</a>.</p>
         </div>
 
         <div class="form-step" data-step="success">
@@ -211,6 +214,7 @@ ${opts}
     </label>
   </div>
   <button type="submit" class="submit-btn">Submit Application</button>
+  <p class="form-terms">By submitting, you agree to our <a href="/termsandconditions">Terms and Conditions</a>.</p>
   <p class="form-error" id="contractor-form-error" hidden></p>
   <p class="form-success" id="contractor-form-success" hidden>Thanks! We'll be in touch after reviewing your application.</p>
 </form>
@@ -691,6 +695,55 @@ function reviewsPage() {
 ` + footer();
 }
 
+// ---------- terms and conditions ----------
+// The wording lives in data/terms.js so it can be edited on its own.
+function termsPage() {
+  return head({
+    title: "Terms and Conditions | South Jersey Home Repairs",
+    description: "How South Jersey Home Repairs works: we refer homeowners to independent contractors and do not perform the work. Terms for homeowners and contractors.",
+    canonical: "/termsandconditions"
+  }) + header() + `
+<style>
+  .sjt { max-width: 780px; margin: 0 auto; }
+  .sjt h2 { text-align: left; font-size: 1.55rem; margin: 2.75rem 0 1rem; scroll-margin-top: 1rem; }
+  .sjt h3 { font-size: 1.05rem; margin: 1.6rem 0 .5rem; color: #fff; }
+  .sjt p, .sjt li { color: var(--light-muted); }
+  .sjt strong { color: #e6ebf2; }
+  .sjt ul { padding-left: 1.25rem; margin: 0 0 12px; }
+  .sjt li { margin-bottom: .45rem; }
+  .sjt a { color: #a9b98a; text-decoration: underline; }
+  .sjt-toc { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 1rem 1.25rem; margin: 1.5rem 0 0; }
+  .sjt-toc ul { list-style: none; padding: 0; margin: .25rem 0 0; }
+  .sjt-toc li { margin: .3rem 0; }
+  .sjt-accept { margin-top: 2.5rem; padding: 1.25rem; border: 1px solid rgba(255,255,255,.18); border-radius: 12px; text-align: center; }
+</style>
+
+<section class="hero sjn-page-hero">
+  <div class="container">
+    <div class="hero-copy">
+      <h1>Terms and Conditions</h1>
+      <p class="hero-sub">Last updated ${esc(terms.UPDATED)}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sjt">
+${terms.html}
+    </div>
+  </div>
+</section>
+
+<!-- Hidden copy of the homeowner form. Your js/script.js expects it on
+     every page; this keeps it from erroring here. Safe to leave as is. -->
+<div hidden aria-hidden="true">
+  ${leadForm()}
+</div>
+
+` + footer();
+}
+
 // ---------- home page ----------
 // index.html is written by hand, but its four trade lists (menu, form
 // buttons, contractor dropdown, footer links) sit between marker comments
@@ -742,6 +795,7 @@ write("about/index.html", aboutPage());
 write("contractors/index.html", contractorsPage());
 write("service-areas/index.html", serviceAreasPage());
 write("reviews/index.html", reviewsPage());
+write("termsandconditions/index.html", termsPage());
 write("review/index.html", reviewsPage());   // same page, in case someone drops the "s"
 syncHomePage();
 
@@ -755,7 +809,7 @@ ${header()}
 <script src="/js/nav.js"></script>
 `);
 
-const urls = ["/", "/about", "/contractors", "/service-areas", ...trades.map((t) => "/" + t.slug)];
+const urls = ["/", "/about", "/contractors", "/service-areas", ...trades.map((t) => "/" + t.slug), "/termsandconditions"];
 write("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url><loc>${DOMAIN}${u}</loc></url>`).join("\n")}

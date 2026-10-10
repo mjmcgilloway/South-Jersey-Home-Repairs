@@ -80,4 +80,11 @@ form[data-preselect] .form-step[data-step="1"] { display: none !important; }
   .matchmaker .card-grid.sjn-steps { display: flex; flex-wrap: wrap; justify-content: center; }
   .matchmaker .card-grid.sjn-steps > .card { flex: 0 0 calc((100% - 21px) / 2); }
 }
+/* ----- Small Terms and Conditions link in the footer ----- */
+.site-footer .sjn-legal { font-size: .75rem; margin-top: .25rem; }
+.site-footer .sjn-legal a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+
+/* ----- "By submitting, you agree to our Terms" under form buttons ----- */
+.form-terms { font-size: .75rem; color: var(--muted, #5b6472); text-align: center; margin: 10px 0 0; }
+.form-terms a { color: inherit; text-decoration: underline; }
 mark { background: #fff3c4; color: #1f2937; padding: 0 .2em; }
