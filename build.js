@@ -561,7 +561,7 @@ function contractorsPage() {
   .sjc-table .us { font-weight: 600; }
   .sjc-yes { color: #3b6b2a !important; font-weight: 700; }
   .sjc-no { color: #a3342b !important; font-weight: 700; }
-  .sjc-fees { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .sjc-fees { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
   .sjc-fees .card { text-align: center; }
   .sjc-fees ul { margin: .5rem 0 0; padding-left: 1.2rem; columns: 2; column-gap: 1.25rem; }
   .sjc-fees li { margin-bottom: .3rem; break-inside: avoid; }
@@ -628,7 +628,11 @@ function contractorsPage() {
     <h2>Pricing</h2>
     <h3 class="sjc-sub" style="margin-top:0">Qualified lead fee</h3>
     <p class="sjc-lead">A flat fee per qualified, verified lead delivered, whether or not the job closes.</p>
-    <div class="sjc-fees sjc-center" style="max-width:760px">
+    <div class="sjc-fees sjc-center" style="max-width:1020px">
+      <div class="card">
+        <h3 class="sjn-price">$35</h3>
+        <p>per qualified lead for small, lower-cost jobs and services</p>
+      </div>
       <div class="card">
         <h3 class="sjn-price">$50</h3>
         <p>per qualified lead for lower-ticket trades</p>
@@ -638,7 +642,7 @@ function contractorsPage() {
         <p>per qualified lead for higher-ticket and technical trades</p>
       </div>
     </div>
-    <p class="sjc-lead" style="margin-top:1rem">We'll confirm which fee applies to your trade when you join.</p>
+    <p class="sjc-lead" style="margin-top:1rem">We'll confirm which fee applies to your trade, and to smaller jobs, when you join.</p>
 
     <h3 class="sjc-sub">Referral percentage on closed jobs</h3>
     <p class="sjc-lead">Applies to every trade once a referred job closes. The lead fee you already paid is credited against what's owed, so you never pay twice for the same job.</p>
@@ -646,6 +650,7 @@ function contractorsPage() {
       <table class="sjc-table">
         <thead><tr><th>Closed job value</th><th>Referral percentage</th></tr></thead>
         <tbody>
+          <tr><td>Under $500</td><td>None, lead fee only</td></tr>
           <tr><td>$500 – $1,999</td><td>5%</td></tr>
           <tr><td>$2,000 – $4,999</td><td>4%</td></tr>
           <tr><td>$5,000 – $14,999</td><td>3%</td></tr>
@@ -655,6 +660,7 @@ function contractorsPage() {
       </table>
     </div>
     <p class="sjc-example sjc-center"><strong>Example:</strong> A $6,000 job closes at the 3% tier, so $180 is owed. The $75 lead fee you already paid is credited, leaving a balance of $105.</p>
+    <p class="sjc-lead" style="margin-top:1rem"><strong>Small jobs never cost you extra.</strong> Jobs under $500 owe only the lead fee. And if a job's referral percentage comes to less than the lead fee you already paid, South Jersey Home Repairs doesn't charge anything further.</p>
   </div>
 </section>
 

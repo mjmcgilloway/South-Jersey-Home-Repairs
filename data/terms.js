@@ -87,7 +87,7 @@ const html = `
 <p>By accepting a referral, you agree to pay the qualified lead fee for that lead and the referral percentage on any job that closes with that homeowner, as described in these Terms. We keep a record of each acceptance, including the date, the homeowner, and how you accepted, and those records are used to determine what you owe. If you don't want a lead, tell us before you accept it and you won't be charged.</p>
 
 <h3>3.4 Fees</h3>
-<p><strong>Qualified lead fee.</strong> $50 per qualified lead for lower-ticket trades, and $75 per qualified lead for higher-ticket and technical trades. We will confirm which fee applies to your trade when you join. The lead fee is owed for each lead you accept, whether or not the job closes.</p>
+<p><strong>Qualified lead fee.</strong> $35 per qualified lead for small, lower-cost jobs and services, $50 per qualified lead for lower-ticket trades, and $75 per qualified lead for higher-ticket and technical trades. We will confirm which fee applies to your trade, and to smaller jobs, when you join. The lead fee is owed for each lead you accept, whether or not the job closes.</p>
 <p><strong>Referral percentage on closed jobs.</strong> When a referred job closes, you owe a percentage of the closed job value:</p>
 <ul>
   <li>$500 to $1,999: 5%</li>
