@@ -11,6 +11,7 @@
 const fs = require("fs");
 const path = require("path");
 const trades = require("./data/trades.js");
+const { COST_YEAR, COSTS } = require("./data/costs.js");
 const terms = require("./data/terms.js");
 
 const DOMAIN = "https://southjerseyhomerepairs.com";
@@ -246,6 +247,49 @@ ${cols}
 `;
 }
 
+// "What does it cost?" section. Prices live in data/costs.js.
+// Shows only on trades that have an entry there.
+function costSection(t) {
+  const c = COSTS[t.slug];
+  if (!c) return "";
+  const rows = c.items.map(([job, range]) => `          <tr><th scope="row">${esc(job)}</th><td>${esc(range)}</td></tr>`).join("\n");
+  return `<section class="section sjp-cost" id="cost">
+  <style>
+    .sjp-wrap { max-width: 760px; margin: 1.25rem auto 0; overflow-x: auto; border-radius: 12px; }
+    .sjp-table { width: 100%; border-collapse: collapse; background: #fff; font-size: .98rem; }
+    .sjp-table th, .sjp-table td { padding: .85rem 1rem; border-bottom: 1px solid #e3e8ec; color: #1a1f29; text-align: left; vertical-align: top; }
+    .sjp-table thead th { background: #1e2f4d; color: #fff; font-weight: 700; border-bottom: 0; }
+    .sjp-table tbody th { font-weight: 500; }
+    .sjp-table td { font-weight: 700; white-space: nowrap; }
+    .sjp-table tbody tr:nth-child(even) { background: #f6f8f9; }
+    .sjp-table tbody tr:last-child th, .sjp-table tbody tr:last-child td { border-bottom: 0; }
+    .sjp-quote { max-width: 760px; margin: 1.25rem auto 0; background: #f3f6ef; border-left: 4px solid #6b7a4a; border-radius: 6px; padding: 1rem 1.15rem; text-align: left; }
+    .sjp-quote p { color: #1a1f29; margin: 0; }
+    .sjp-quote p + p { margin-top: .5rem; }
+    @media (max-width: 560px) { .sjp-table td { white-space: normal; } }
+  </style>
+  <div class="container">
+    <h2>What does ${esc(c.topic || noun(t))} cost in South Jersey?</h2>
+    <p class="sjc-lead">Typical ranges for common ${esc(noun(t))} jobs in South Jersey, so you know what to expect before you get a quote.</p>
+    <div class="sjp-wrap">
+      <table class="sjp-table">
+        <thead><tr><th scope="col">Job</th><th scope="col">Typical range</th></tr></thead>
+        <tbody>
+${rows}
+        </tbody>
+      </table>
+    </div>
+    <div class="sjp-quote">
+      <p><strong>These are typical ranges for South Jersey as of ${COST_YEAR}.</strong> Your contractor will give you an exact quote after seeing the job.</p>
+      ${c.factors ? `<p><strong>What affects the price:</strong> ${esc(c.factors)}</p>` : ""}
+    </div>
+    <p class="sjc-lead" style="margin-top:1.25rem"><a href="#home">Get matched with ${esc(an(t.pro))} for an exact quote →</a></p>
+  </div>
+</section>
+
+`;
+}
+
 function tradePage(t) {
   const cards = t.jobs.map(([n, d]) => `      <div class="card">
         <h3>${esc(n)}</h3>
@@ -283,7 +327,7 @@ ${cards}
   </div>
 </section>
 
-<section class="section matchmaker">
+${costSection(t)}<section class="section matchmaker">
   <div class="container">
     <h2>How it works</h2>
     <div class="card-grid sjn-steps sjn-center">
