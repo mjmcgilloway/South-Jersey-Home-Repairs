@@ -12,6 +12,7 @@ const fs = require("fs");
 const path = require("path");
 const trades = require("./data/trades.js");
 const { COST_YEAR, COSTS } = require("./data/costs.js");
+const FAQS = require("./data/faqs.js");
 const terms = require("./data/terms.js");
 
 const DOMAIN = "https://southjerseyhomerepairs.com";
@@ -333,7 +334,26 @@ ${rows}
 
 // Structured data for a trade page: the service it covers, and the
 // "Home > Roofing" trail Google can show under the page in results.
+// Questions homeowners ask about this trade. Lives in data/faqs.js.
+// Shows only on trades that have an entry there.
+function faqSection(t) {
+  const qs = FAQS[t.slug];
+  if (!qs || !qs.length) return "";
+  const items = qs.map(([q, a]) => `      <details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join("\n");
+  return `<section class="section faq" id="faq">
+  <div class="container">
+    <h2>${esc(t.name)} questions homeowners ask</h2>
+    <div class="accordion">
+${items}
+    </div>
+  </div>
+</section>
+
+`;
+}
+
 function tradeSchemas(t) {
+  const qs = FAQS[t.slug] || [];
   return [
     {
       "@context": "https://schema.org",
@@ -353,7 +373,12 @@ function tradeSchemas(t) {
         { "@type": "ListItem", position: 1, name: "Home", item: DOMAIN + "/" },
         { "@type": "ListItem", position: 2, name: t.name, item: `${DOMAIN}/${t.slug}` }
       ]
-    }
+    },
+    ...(qs.length ? [{
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: qs.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } }))
+    }] : [])
   ];
 }
 
@@ -435,7 +460,7 @@ ${cards}
   </div>
 </section>
 
-${costSection(t)}<section class="section matchmaker">
+${costSection(t)}${faqSection(t)}<section class="section matchmaker">
   <div class="container">
     <h2>How it works</h2>
     <div class="card-grid sjn-steps sjn-center">
