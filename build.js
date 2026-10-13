@@ -17,6 +17,44 @@ const terms = require("./data/terms.js");
 const DOMAIN = "https://southjerseyhomerepairs.com";
 const PHONE = "(856) 318-9421";
 const TEL = "8563189421";
+const EMAIL = "southjerseyhomerepairsllc@gmail.com";
+
+// ---------- analytics ----------
+// Paste your Google Analytics 4 measurement ID here (it starts with
+// "G-", e.g. "G-ABC123XYZ") to turn on visitor tracking on every page,
+// including the home page. Leave it empty ("") and nothing is added.
+const GA_ID = "";
+
+// ---------- business info for Google (structured data) ----------
+// Hidden code that tells search engines who you are, how to reach you,
+// and where you work. It is set up as a referral service, not a
+// contractor, and leaves out a street address on purpose.
+const AREAS_SERVED = ["Camden County, NJ", "Gloucester County, NJ"];
+const BUSINESS = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": DOMAIN + "/#business",
+  name: "South Jersey Home Repairs",
+  url: DOMAIN + "/",
+  logo: DOMAIN + "/assets/logo.png",
+  image: DOMAIN + "/assets/share.png",
+  telephone: "+1-856-318-9421",
+  email: EMAIL,
+  description: "A free referral service that matches South Jersey homeowners with licensed, local contractors. We connect homeowners with independent pros and do not perform the work ourselves.",
+  areaServed: AREAS_SERVED.map((name) => ({ "@type": "AdministrativeArea", name })),
+  priceRange: "Free for homeowners"
+};
+const WEBSITE = { "@context": "https://schema.org", "@type": "WebSite", "@id": DOMAIN + "/#website", name: "South Jersey Home Repairs", url: DOMAIN + "/", publisher: { "@id": DOMAIN + "/#business" } };
+const jsonLd = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, "\\u003c")}</script>`;
+function analyticsTag() {
+  if (!GA_ID) return "";
+  return `<script async src="https://www.googletagmanager.com/gtag/js?id=${GA_ID}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');</script>`;
+}
+// Everything extra that goes in every page's <head>.
+function headExtras(schemas = []) {
+  return [analyticsTag(), ...schemas.map(jsonLd)].filter(Boolean).join("\n");
+}
 
 // ---------- reviews link ----------
 // southjerseyhomerepairs.com/reviews sends people to the address below.
@@ -51,7 +89,7 @@ function tradeOptions(trade = null) {
 }
 
 // ---------- shared ----------
-function head({ title, description, canonical, noindex = false }) {
+function head({ title, description, canonical, noindex = false, schemas = [] }) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,8 +105,8 @@ function head({ title, description, canonical, noindex = false }) {
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:image" content="${DOMAIN}/assets/share.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/png" href="/assets/logo.png">
-<link rel="apple-touch-icon" href="/assets/logo.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -81,6 +119,7 @@ function head({ title, description, canonical, noindex = false }) {
   .sjc-sub { text-align: center; margin-top: 2.25rem; }
   .sjc-center { margin-left: auto !important; margin-right: auto !important; }
 </style>
+${headExtras([BUSINESS, ...schemas])}
 </head>
 <body>
 `;
@@ -92,7 +131,7 @@ function header(active = "") {
   return `<header class="site-header">
   <div class="container header-inner">
     <a href="/" class="logo-link">
-      <img src="/assets/logo.png" alt="South Jersey Home Repairs" class="logo-icon">
+      <img src="/assets/logo-160.png" alt="South Jersey Home Repairs" class="logo-icon" width="160" height="160">
       <span class="logo">South Jersey <span class="logo-accent">Home Repairs</span></span>
     </a>
     <button class="sjn-toggle" type="button" aria-expanded="false" aria-controls="sjn">Menu</button>
@@ -124,7 +163,7 @@ function footer() {
     </nav>
     <p><a href="/service-areas">Service areas: Camden &amp; Gloucester counties</a></p>
     <p>© <span id="year"></span> South Jersey Home Repairs, LLC. All rights reserved. LLC #0451530369</p>
-    <p>Phone: <a href="tel:${TEL}">${PHONE.replace(/[()]/g, "").replace(" ", "-")}</a></p>
+    <p>Phone: <a href="tel:${TEL}">${PHONE.replace(/[()]/g, "").replace(" ", "-")}</a> · Email: <a href="mailto:${EMAIL}">${EMAIL}</a></p>
     <p class="sjn-legal"><a href="/termsandconditions">Terms and Conditions</a></p>
   </div>
 </footer>
@@ -292,6 +331,72 @@ ${rows}
 `;
 }
 
+// Structured data for a trade page: the service it covers, and the
+// "Home > Roofing" trail Google can show under the page in results.
+function tradeSchemas(t) {
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: `${t.name} in South Jersey`,
+      serviceType: t.name,
+      description: t.intro,
+      url: `${DOMAIN}/${t.slug}`,
+      provider: { "@id": DOMAIN + "/#business" },
+      areaServed: AREAS_SERVED.map((name) => ({ "@type": "AdministrativeArea", name })),
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD", description: "Free contractor matching for homeowners" }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: DOMAIN + "/" },
+        { "@type": "ListItem", position: 2, name: t.name, item: `${DOMAIN}/${t.slug}` }
+      ]
+    }
+  ];
+}
+
+// ---------- page not found (404) ----------
+// Netlify shows 404.html whenever someone visits an address that
+// doesn't exist, instead of its generic error page.
+function notFoundPage() {
+  const links = trades.map((t) => `<li><a href="/${t.slug}">${esc(t.name)}</a></li>`).join("");
+  return head({
+    title: "Page not found | South Jersey Home Repairs",
+    description: "That page doesn't exist. Find the service you need or call South Jersey Home Repairs.",
+    canonical: "/404",
+    noindex: true
+  }) + header() + `
+<style>
+  .sj404-list { list-style: none; padding: 0; margin: 1.25rem auto 0; max-width: 900px; display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: .5rem; }
+  .sj404-list a { display: block; padding: .7rem .9rem; border-radius: 8px; background: #fff; color: #1e2f4d; font-weight: 600; text-align: left; }
+</style>
+<section class="hero sjn-page-hero">
+  <div class="container">
+    <div class="hero-copy">
+      <h1>Sorry, we can't find that page</h1>
+      <p class="hero-sub">The address may be mistyped, or the page may have moved. Pick a service below, head to the <a href="/">home page</a>, or call us at <a href="tel:${TEL}">${PHONE}</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Find a pro for your project</h2>
+    <ul class="sj404-list">${links}</ul>
+  </div>
+</section>
+
+<!-- Hidden copy of the homeowner form. Your js/script.js expects it on
+     every page; this keeps it from erroring here. Safe to leave as is. -->
+<div hidden aria-hidden="true">
+  ${leadForm()}
+</div>
+
+` + footer();
+}
+
 function tradePage(t) {
   const cards = t.jobs.map(([n, d]) => `      <div class="card">
         <h3>${esc(n)}</h3>
@@ -300,7 +405,8 @@ function tradePage(t) {
   return head({
     title: `${t.name} in South Jersey | South Jersey Home Repairs`,
     description: `Need ${noun(t)} help in South Jersey? Get matched with ${cred(t)} local ${t.pro}. Free for homeowners, no obligation.`,
-    canonical: `/${t.slug}`
+    canonical: `/${t.slug}`,
+    schemas: tradeSchemas(t)
   }) + header(t.slug) + `
 <section class="hero" id="home">
   <div class="container hero-inner">
@@ -802,7 +908,8 @@ function syncHomePage() {
     "services-menu": { indent: "          ", body: menuItems() },
     "service-buttons": { indent: "            ", body: optionButtons() },
     "trade-options": { indent: "        ", body: tradeOptions() },
-    "footer-links": { indent: "      ", body: footerLinks() }
+    "footer-links": { indent: "      ", body: footerLinks() },
+    "head-extras": { indent: "", body: headExtras([BUSINESS, WEBSITE]) }
   };
   let html;
   try {
@@ -843,6 +950,13 @@ write("service-areas/index.html", serviceAreasPage());
 write("reviews/index.html", reviewsPage());
 write("termsandconditions/index.html", termsPage());
 write("review/index.html", reviewsPage());   // same page, in case someone drops the "s"
+write("404.html", notFoundPage());
+write("robots.txt", `User-agent: *
+Allow: /
+Disallow: /snippets/
+
+Sitemap: ${DOMAIN}/sitemap.xml
+`);
 syncHomePage();
 
 // Header for your home page (paste into index.html)
