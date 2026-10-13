@@ -24,7 +24,7 @@ const EMAIL = "southjerseyhomerepairsllc@gmail.com";
 // Paste your Google Analytics 4 measurement ID here (it starts with
 // "G-", e.g. "G-ABC123XYZ") to turn on visitor tracking on every page,
 // including the home page. Leave it empty ("") and nothing is added.
-const GA_ID = "";
+const GA_ID = "G-XLLXQKWNF0";
 
 // ---------- business info for Google (structured data) ----------
 // Hidden code that tells search engines who you are, how to reach you,
