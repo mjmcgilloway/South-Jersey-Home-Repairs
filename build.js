@@ -280,7 +280,7 @@ ${rows}
       </table>
     </div>
     <div class="sjp-quote">
-      <p><strong>These are typical ranges for South Jersey as of ${COST_YEAR}.</strong> Your contractor will give you an exact quote after seeing the job.</p>
+      <p><strong>These are typical ranges for South Jersey as of ${COST_YEAR}, based on published cost data for New Jersey and our area.</strong> They're a general guide, not a quote, and they don't come from the contractors in our network. The details of your job, like its size, materials, and the condition of your home, can put your price above or below these ranges. Your contractor will give you an exact quote after seeing the job.</p>
       ${c.factors ? `<p><strong>What affects the price:</strong> ${esc(c.factors)}</p>` : ""}
     </div>
     <p class="sjc-lead" style="margin-top:1.25rem"><a href="#home">Get matched with ${esc(an(t.pro))} for an exact quote →</a></p>
