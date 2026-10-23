@@ -20,13 +20,15 @@ module.exports = {
     ["Should I repair or replace my AC or furnace?", "If the system is more than 12 to 15 years old, needs frequent repairs, or a single repair costs about half the price of a new system, replacement is usually the better choice. For newer systems, a repair is often the right call."],
     ["What size system does my home need?", "It depends on your home's square footage, insulation, windows, and layout, not just the size of your old unit. A good HVAC contractor will do a load calculation instead of guessing."],
     ["Are there rebates for heat pumps in New Jersey?", "New Jersey's Clean Energy Program and local utilities have offered rebates for qualifying heat pumps and high-efficiency systems. Programs change, so ask your HVAC contractor which ones apply when you buy."],
-    ["How often should I have my system serviced?", "Once a year for each system is the usual recommendation: the AC in spring and the furnace or heat pump in fall. Regular tune-ups help catch small problems early and keep the system running efficiently."]
+    ["How often should I have my system serviced?", "Once a year for each system is the usual recommendation: the AC in spring and the furnace or heat pump in fall. Regular tune-ups help catch small problems early and keep the system running efficiently."],
+    ["Will I be charged a service call fee?", "Many HVAC companies charge a diagnostic or service call fee to send a technician out, and it's often credited toward the repair if you hire them. Expect it to be higher for nights, weekends, and no-heat or no-AC emergencies. Ask about it when the contractor calls to schedule, so there are no surprises."]
   ],
   plumbing: [
     ["What counts as a plumbing emergency?", "A burst pipe, a sewer backup, no water at all, or a leaking water heater are emergencies. Shut off your main water valve if you can. A dripping faucet or a slow drain can usually wait for a regular appointment."],
     ["How long does a water heater last?", "A standard tank water heater usually lasts about 8 to 12 years. Rusty water, rumbling noises, or water around the base are signs it's near the end."],
     ["Do plumbers in New Jersey need a license?", "Yes. Plumbing work in New Jersey is done by or under a licensed master plumber, licensed through the State Board of Examiners of Master Plumbers. We match homeowners with licensed plumbers."],
-    ["Why does my drain keep clogging?", "Repeat clogs usually point to buildup deeper in the line, tree roots in an older sewer line, or a venting problem. A plumber can clear it and, if needed, run a camera down the line to find the cause."]
+    ["Why does my drain keep clogging?", "Repeat clogs usually point to buildup deeper in the line, tree roots in an older sewer line, or a venting problem. A plumber can clear it and, if needed, run a camera down the line to find the cause."],
+    ["Will I be charged a service call fee?", "Most plumbers charge a service call or trip fee to come out and diagnose the problem, and many credit it toward the repair if you go ahead with the work. After-hours and weekend emergency calls usually cost more. Ask about it when the plumber calls to schedule."]
   ],
   fencing: [
     ["Do I need a permit for a fence?", "Many South Jersey towns require a permit or zoning approval for a new fence, with rules on height and placement. Your fence contractor should know your town's rules and can usually handle the paperwork."],
@@ -38,13 +40,15 @@ module.exports = {
     ["When should I upgrade my electrical panel?", "Consider an upgrade if breakers trip often, you have an older fuse box or 100-amp service, or you're adding an EV charger, central air, or a big addition. An electrician can check whether your panel can handle the load."],
     ["Do electricians in New Jersey need a license?", "Yes. Electrical contractors in New Jersey are licensed by the State Board of Examiners of Electrical Contractors, and most electrical work needs a permit and inspection. We match homeowners with licensed electricians."],
     ["Is flickering light a sign of a problem?", "One flickering bulb may just be loose. Flickering across several lights, or flickering when big appliances turn on, can point to a loose connection or an overloaded circuit, which is a fire risk. Have an electrician check it."],
-    ["How much does it cost to install an EV charger?", "A Level 2 home charger usually runs about $1,000 to $2,500 installed in South Jersey. The biggest factor is the distance from your panel to where you park, and whether your panel has room for a new 240-volt circuit."]
+    ["How much does it cost to install an EV charger?", "A Level 2 home charger usually runs about $1,000 to $2,500 installed in South Jersey. The biggest factor is the distance from your panel to where you park, and whether your panel has room for a new 240-volt circuit."],
+    ["Will I be charged a service call fee?", "Many electricians charge a service call or diagnostic fee, because tracking down the cause of a dead outlet or tripping breaker is often a big part of the job. Some credit it toward the repair. Ask about it when the electrician calls to schedule."]
   ],
   restoration: [
     ["What should I do right after water damage?", "Stop the water if you can, turn off power to wet areas if it's safe, and take photos for your insurer. Then call a restoration company quickly, because mold can start growing within 24 to 48 hours."],
     ["Does homeowners insurance cover water damage?", "Most policies cover sudden water damage, like a burst pipe. Flooding from outside usually needs separate flood insurance, and slow leaks that went unrepaired often aren't covered. Check your policy and call your insurer early."],
     ["How long does it take to dry out a house?", "Drying usually takes three to five days with professional equipment, longer for large or soaked areas. Repairs and rebuilding come after the area is fully dry."],
-    ["Can a restoration company work with my insurance?", "Many restoration companies document the damage and work directly with insurance adjusters. Ask about this when you're matched, since it can make the claim process easier."]
+    ["Can a restoration company work with my insurance?", "Many restoration companies document the damage and work directly with insurance adjusters. Ask about this when you're matched, since it can make the claim process easier."],
+    ["Is there a fee for an emergency visit?", "Many restoration companies charge an emergency response fee for after-hours water or fire calls. If the damage is covered by your homeowners insurance, it's often included in the claim. Ask about it when the company calls, and check with your insurer early."]
   ],
   masonry: [
     ["Why are my front steps crumbling?", "Water getting into concrete or mortar and freezing in winter is the most common cause. Small cracks can be repaired, but steps that are sinking, pulling away from the house, or falling apart may need to be rebuilt."],
@@ -110,7 +114,8 @@ module.exports = {
     ["Can I clean mold myself?", "Small areas on hard surfaces, roughly under 10 square feet, can often be cleaned yourself with proper protection. Larger areas, mold in drywall or insulation, or mold that keeps coming back should be handled by a professional."],
     ["Do I need mold testing?", "If you can see the mold, testing often isn't needed to start cleanup. Testing helps when you smell mustiness but can't find the source, or after cleanup to confirm it worked."],
     ["Why does mold keep coming back?", "Mold returns when the moisture problem isn't fixed. Common sources are leaks, poor bathroom or attic ventilation, and damp basements. Fixing the source is part of any lasting repair."],
-    ["Does insurance cover mold removal?", "Sometimes, if the mold came from a sudden, covered event like a burst pipe. Mold from long-term leaks or humidity usually isn't covered. Check your policy."]
+    ["Does insurance cover mold removal?", "Sometimes, if the mold came from a sudden, covered event like a burst pipe. Mold from long-term leaks or humidity usually isn't covered. Check your policy."],
+    ["Does a mold inspection cost extra?", "Some mold remediation companies offer free estimates, while others charge for an inspection or air testing, especially when lab samples are needed. The inspection fee is sometimes credited toward the remediation if you hire them. Ask about it when the company calls to schedule."]
   ],
   "windows-doors": [
     ["When should I replace my windows?", "Drafts, fog between the panes, windows that won't open or lock, rotting frames, and high energy bills are the usual signs. Replacing older single-pane windows also makes a noticeable difference in comfort."],
