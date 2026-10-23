@@ -52,6 +52,8 @@ form[data-preselect] .form-step[data-step="1"] { display: none !important; }
 .sjn-prose { max-width: 760px; }
 .sjn-prose h2 { margin-top: 2rem; }
 .sjn-prose h2:first-child { margin-top: 0; }
+.sjn-prose ul { padding-left: 1.25rem; }
+.sjn-prose li { margin-bottom: 0.6rem; line-height: 1.6; }
 .sjn-price { font-size: 2.2rem; margin-bottom: .25rem; }
 .sjn-btn-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 2rem; }
 .sjn-inline-btn { display: inline-block; width: auto; text-decoration: none; }
